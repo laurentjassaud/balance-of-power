@@ -264,6 +264,23 @@ export class Game {
     return { current, min, max: Math.max(0, max), available }
   }
 
+  /**
+   * What the side to play still has to give out, in the units the policies are shown in (see levelLabel): weapons in
+   * M$ (one pool for the government and the rebels), troops in soldiers, economic aid in M$ a year (null below level 2).
+   * Same pools as limits(), which caps the levels by them.
+   */
+  resources(): { arms: number; troops: number; econ: number | null } {
+    const w = this.w
+    const h = w.human
+    let sum = 0
+    for (let i = 3; i <= NO_CNTRY; i++) sum += econConv(w.econAid[h][i])
+    return {
+      arms: Math.max(0, div(w.miltSpnd[h], 8) + w.govtAid[h]) * 10,
+      troops: Math.max(0, div(w.milMen[h], 4) - w.totlIntv[h]) * 1000,
+      econ: verbsForLevel(w.level).includes(Verb.Econ) ? Math.max(0, div(div(w.gnp[h], 44) - 2 * sum, 2)) * 100 : null,
+    }
+  }
+
   setPolicy(country: number, verb: Verb, value: number): boolean {
     const w = this.w
     if (this.over || this.crisis || this.reacting || country < 3) return false

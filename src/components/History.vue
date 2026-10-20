@@ -3,7 +3,7 @@
 // year, the superpowers side by side. Shown by level as in the original: the left column and the bottom row
 // always, popularity and economic pressure from level 2, finlandization and treaties from level 3.
 // The table view gives every value without hovering.
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useGameStore } from '../stores/game'
 import { FIRST_YEAR, USA, Verb, type HistoryYear } from '../engine/core'
 import { LAST_YEAR } from '../engine/game'
@@ -107,6 +107,32 @@ const charts = computed<Chart[]>(() => {
 
 const played = computed(() => years.filter((y) => records.value.has(y)))
 const tableView = ref(false)
+
+// Table view: the mouse in the left or right fifth scrolls the years that way, faster nearer the edge;
+// in the middle or off the table, nothing moves.
+const wrap = ref<HTMLDivElement>()
+const EDGE = 0.2, MAX_SPEED = 0.6 // px per ms at the very edge
+let speed = 0, frame = 0, last = 0, rest = 0
+function edgeScroll(e: PointerEvent) {
+  if (e.pointerType !== 'mouse' || !wrap.value) return
+  const r = wrap.value.getBoundingClientRect()
+  const t = (e.clientX - r.left) / r.width
+  const d = t < EDGE ? -(1 - t / EDGE) : t > 1 - EDGE ? (t - 1 + EDGE) / EDGE : 0
+  speed = Math.sign(d) * d * d * MAX_SPEED
+  if (speed && !frame) { last = performance.now(); frame = requestAnimationFrame(step) }
+}
+function step(now: number) {
+  const el = wrap.value
+  if (!el || !speed) { frame = 0; rest = 0; return }
+  // Whole pixels only, the remainder carried over, so a slow drift still moves.
+  rest += speed * (now - last)
+  last = now
+  const px = Math.trunc(rest)
+  if (px) { el.scrollLeft += px; rest -= px }
+  frame = requestAnimationFrame(step)
+}
+const stopScroll = () => { speed = 0 }
+onBeforeUnmount(() => cancelAnimationFrame(frame))
 </script>
 
 <template>
@@ -129,7 +155,7 @@ const tableView = ref(false)
         :domain="ch.domain" :ticks="ch.ticks" :lines="ch.lines" :bars="ch.bars" :events="ch.events" :event-label="ch.eventLabel"
         :tip="ch.tip" :tick-label="ch.tickLabel" />
     </div>
-    <div v-else class="table-wrap">
+    <div v-else ref="wrap" class="table-wrap" @pointermove="edgeScroll" @pointerleave="stopScroll">
       <table>
         <thead><tr><th scope="col">Série</th><th v-for="y in years" :key="y" scope="col">{{ y }}</th></tr></thead>
         <tbody>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Ranking strip after the atlas: every country, from the lowest to the highest value of the current map mode.
-// Each name is linked by a thin line to its place on the scale; a click opens the country's file.
+// Each name is linked by a thin line to its place on the scale; a click opens the country's file, a second one clears the selection.
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useGameStore, CATEGORICAL } from '../stores/game'
 import { USA, USSR } from '../engine/core'
@@ -24,24 +24,22 @@ const strip = computed(() => {
   const W = Math.max(boxW.value, IN * 2 + rows.length * 8.4)
   const slotX = (r: number) => IN + (r * (W - 2 * IN)) / Math.max(1, rows.length - 1)
   const colors = store.legend.colors
-  const cat = CATEGORICAL.has(m)
-  let ticks: { x: number; t: string; anchor: string }[] = []
-  let segs: { x: number; w: number; color: string; t: string; dy: number; tx: number; anchor: string }[] = []
-  let xOf: (n: number, r: number) => number = (_n, r) => slotX(r)
-  if (cat) {
-    // One coloured segment per class, as wide as the countries it holds.
-    let i0 = 0, lab = 0
-    colors.forEach((color, k) => {
-      const cnt = rows.filter((r) => r.k === k).length
-      if (!cnt) return
-      const a = Math.max(0, slotX(i0) - 4), b = Math.min(W, slotX(i0 + cnt - 1) + 4)
-      // Labels in the right third are aligned on the segment's end so they stay inside the strip.
-      const end = a > W * 0.66
-      segs.push({ x: a, w: b - a, color, t: `${store.legend.labels[k].toUpperCase()} · ${cnt}`, dy: (lab++ % 2) * 12, tx: end ? b : a, anchor: end ? 'end' : 'start' })
-      i0 += cnt
-    })
+  // Piecewise scale, the same for every mode: each colour class gets an equal share of the axis.
+  const step = W / colors.length
+  const edge = (i: number) => Math.max(0.5, Math.min(W - 0.5, i * step))
+  // Support runs its classes the other way (the less popular, the hotter), so its shares take their colours in reverse.
+  const byValue = m === 'support' ? [...colors].reverse() : colors
+  const segs = byValue.map((color, i) => ({ x: i * step, w: step, color }))
+  let ticks: { x: number; t: string; anchor: string }[]
+  let names: { x: number; t: string }[] = []
+  let xOf: (n: number, k: number) => number
+  if (CATEGORICAL.has(m)) {
+    // Classes that are categories, not ranges of a number: limits without figures, each class named under its
+    // share, its countries meeting at its middle.
+    ticks = Array.from({ length: colors.length + 1 }, (_, i) => ({ x: edge(i), t: '', anchor: 'middle' }))
+    names = store.legend.labels.map((t, k) => ({ x: (k + 0.5) * step, t }))
+    xOf = (_n, k) => (k + 0.5) * step
   } else {
-    // Piecewise scale: each colour class gets an equal share of the axis.
     // Policy levels always run 0..5, so their scale stays the same from year to year.
     // Background figures run from their lowest to their highest value.
     const cuts = store.cuts, policy = m.startsWith('policy:'), bg = !!store.bgInd
@@ -49,21 +47,21 @@ const strip = computed(() => {
     const lo = policy ? 0 : bg ? first : Math.min(first, cuts[0] - 1)
     const hi = policy ? 5 : bg ? last : Math.max(last, cuts[cuts.length - 1] + 1)
     const dom = [lo, ...cuts, hi]
-    const step = W / (dom.length - 1)
     xOf = (n) => {
       let i = 0
       while (i < dom.length - 2 && n >= dom[i + 1]) i++
       const t = (n - dom[i]) / (dom[i + 1] - dom[i] || 1)
-      return Math.max(IN, Math.min(W - IN, (i + Math.max(0, Math.min(1, t))) * step))
+      return (i + Math.max(0, Math.min(1, t))) * step
     }
-    ticks = dom.map((d, i) => ({ x: Math.max(0.5, Math.min(W - 0.5, i * step)), t: store.fmtTick(d), anchor: i === 0 ? 'start' : i === dom.length - 1 ? 'end' : 'middle' }))
-    segs = colors.map((color, k) => ({ x: k * step, w: step, color, t: '', dy: 0, tx: 0, anchor: 'start' }))
+    ticks = dom.map((d, i) => ({ x: edge(i), t: store.fmtTick(d), anchor: i === 0 ? 'start' : i === dom.length - 1 ? 'end' : 'middle' }))
   }
-  const items = rows.map((r, i) => ({ ...r, x: slotX(i), vx: xOf(r.n, i), color: store.fill(r.c) }))
-  return { W, items, ticks, segs, cat, title: store.legend.title }
+  const items = rows.map((r, i) => ({ ...r, x: slotX(i), vx: Math.max(IN, Math.min(W - IN, xOf(r.n, r.k))), color: store.fill(r.c) }))
+  return { W, items, ticks, names, segs, title: store.legend.title }
 })
 
 function pick(c: number) {
+  // A second click on the selected country clears the selection.
+  if (c === store.selected) { store.selected = 0; return }
   store.selected = c
   store.tab = 'country'
 }
@@ -86,10 +84,8 @@ onBeforeUnmount(() => ro?.disconnect())
       <svg :width="strip.W" :height="H" :viewBox="`0 0 ${strip.W} ${H}`" role="img" :aria-label="`Classement des pays : ${strip.title}`">
         <rect v-for="(s, i) in strip.segs" :key="`s${i}`" :x="s.x" :y="AXIS_Y - 3" :width="s.w" height="6" :fill="s.color" />
         <line :x1="0" :x2="strip.W" :y1="AXIS_Y" :y2="AXIS_Y" class="axis" />
-        <template v-if="strip.cat">
-          <text v-for="(s, i) in strip.segs" :key="`t${i}`" :x="s.tx" :y="AXIS_Y + 20 + s.dy" :text-anchor="s.anchor" class="tk">{{ s.t }}</text>
-        </template>
-        <g v-for="(t, i) in strip.ticks" v-else :key="`k${i}`">
+        <text v-for="(s, i) in strip.names" :key="`n${i}`" :x="s.x" :y="AXIS_Y + 20" text-anchor="middle" class="tk">{{ s.t }}</text>
+        <g v-for="(t, i) in strip.ticks" :key="`k${i}`">
           <line :x1="t.x" :x2="t.x" :y1="AXIS_Y - 6" :y2="AXIS_Y + 6" class="axis" />
           <text :x="t.x" :y="AXIS_Y + 20" :text-anchor="t.anchor" class="tk">{{ t.t }}</text>
         </g>

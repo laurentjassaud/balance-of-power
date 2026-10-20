@@ -12,13 +12,17 @@ const lim = computed(() => store.game!.limits(props.country, props.verb))
 const choice = ref(lim.value.current)
 const levels = [0, 1, 2, 3, 4, 5]
 
-const UNITS: Partial<Record<Verb, string>> = {
-  [Verb.MilAid]: 'en armement disponible',
-  [Verb.InsgAid]: 'en armement disponible',
-  [Verb.IntvGovt]: '000 soldats disponibles',
-  [Verb.IntvRebl]: '000 soldats disponibles',
-  [Verb.Econ]: 'en budget d’aide disponible',
-}
+// What is left to give out for this policy, in the units of the Dossier's resources.
+const fr = (x: number) => x.toLocaleString('fr-FR')
+const avail = computed(() => {
+  const r = store.game!.resources()
+  switch (props.verb) {
+    case Verb.MilAid: case Verb.InsgAid: return `${fr(r.arms)} M$ d’armement disponibles`
+    case Verb.IntvGovt: case Verb.IntvRebl: return `${fr(r.troops)} soldats disponibles`
+    case Verb.Econ: return `${fr(r.econ ?? 0)} M$ par an d’aide disponibles`
+    default: return ''
+  }
+})
 
 function apply() {
   if (choice.value !== lim.value.current) store.setPolicy(props.country, props.verb, choice.value)
@@ -31,7 +35,7 @@ function apply() {
     <form class="dlg br" role="dialog" aria-modal="true" @submit.prevent="apply">
       <p class="label">{{ store.w?.names[country] }}</p>
       <h3>{{ VERB_LABEL[verb] }}</h3>
-      <p v-if="lim.available !== null" class="avail num">Ressources : {{ lim.available }} {{ UNITS[verb] }}</p>
+      <p v-if="avail" class="avail num">Ressources : {{ avail }}</p>
       <div class="levels">
         <label v-for="l in levels" :key="l" :class="{ off: l < lim.min || l > lim.max, on: choice === l }">
           <input :id="`pol-${l}`" v-model="choice" type="radio" name="pol" :value="l" :disabled="l < lim.min || l > lim.max" />

@@ -45,6 +45,16 @@ function newGame() {
   if (w.value?.ended) store.quit()
   else confirmNew.value = true
 }
+// The year can't be played again, so moving on asks first too.
+const confirmNext = ref(false)
+// What the side to play still has to give out, at the foot of the Dossier.
+const fr = (x: number) => x.toLocaleString('fr-FR')
+const res = computed(() => {
+  void store.version
+  return store.game?.resources()
+})
+// Once the game is over there is no news to handle nor policy to set: the Dossier keeps only the prestige.
+const tab = computed(() => (w.value?.ended ? 'scores' : store.tab))
 </script>
 
 <template>
@@ -65,7 +75,7 @@ function newGame() {
       <div class="actions">
         <span v-if="w.twoPlayer" class="label turn">Au tour de <span :class="w.human === USA ? 'usa' : 'ussr'">{{ sideName(w.human) }}</span></span>
         <button v-if="w.twoPlayer && !w.handedOver" id="handover" class="primary" :disabled="busy || !!w.ended" @click="store.handOver()">Passer la main {{ w.human === USA ? 'à l’URSS' : 'aux États-Unis' }}</button>
-        <button v-else id="next-turn" class="primary" :disabled="busy || !!w.ended" @click="store.nextTurn()">Année suivante</button>
+        <button v-else id="next-turn" class="primary" :disabled="busy || !!w.ended" @click="confirmNext = true">Année suivante</button>
       </div>
       <div class="mode">
         <label class="label" for="mapmode">Indice affiché</label>
@@ -107,14 +117,24 @@ function newGame() {
       <div class="head label">Dossier</div>
       <div class="scroll">
       <nav class="tabs" role="tablist">
-        <button role="tab" :aria-selected="store.tab === 'news'" @click="store.tab = 'news'">Actualités</button>
-        <button role="tab" :aria-selected="store.tab === 'country'" @click="store.tab = 'country'">Pays</button>
-        <button role="tab" :aria-selected="store.tab === 'scores'" @click="store.tab = 'scores'">Prestige</button>
+        <template v-if="!w.ended">
+          <button role="tab" :aria-selected="tab === 'news'" @click="store.tab = 'news'">Actualités</button>
+          <button role="tab" :aria-selected="tab === 'country'" @click="store.tab = 'country'">Pays</button>
+        </template>
+        <button role="tab" :aria-selected="tab === 'scores'" @click="store.tab = 'scores'">Prestige</button>
       </nav>
-      <NewsPanel v-if="store.tab === 'news'" />
-      <CountryPanel v-else-if="store.tab === 'country'" />
+      <NewsPanel v-if="tab === 'news'" />
+      <CountryPanel v-else-if="tab === 'country'" />
       <ScoreChart v-else />
       </div>
+      <section v-if="res && !w.ended" class="res" aria-labelledby="res-title">
+        <div id="res-title" class="label">Ressources à distribuer · <span :class="w.human === USA ? 'usa' : 'ussr'">{{ sideName(w.human) }}</span></div>
+        <dl>
+          <dt>Armement <small>gouvernements et rebelles</small></dt><dd class="num">{{ fr(res.arms) }} M$</dd>
+          <dt>Troupes d’intervention</dt><dd class="num">{{ fr(res.troops) }} soldats</dd>
+          <template v-if="res.econ !== null"><dt>Aide économique</dt><dd class="num">{{ fr(res.econ) }} M$ par an</dd></template>
+        </dl>
+      </section>
     </aside>
 
     <Transition name="paper" :duration="{ enter: 260, leave: 150 }">
@@ -125,6 +145,8 @@ function newGame() {
     </Transition>
     <ConfirmDialog v-if="confirmNew" title="Nouvelle partie ?" text="La partie en cours et sa sauvegarde seront effacées."
       confirm="Nouvelle partie" cancel="Continuer la partie" @confirm="confirmNew = false; store.quit()" @cancel="confirmNew = false" />
+    <ConfirmDialog v-if="confirmNext" :title="`Passer à ${w.year + 1} ?`" :text="`Les décisions de ${w.year} seront appliquées et ne pourront plus être modifiées.`"
+      confirm="Année suivante" :cancel="`Rester en ${w.year}`" @confirm="confirmNext = false; store.nextTurn()" @cancel="confirmNext = false" />
     <CrisisDialog v-if="store.game?.crisis" />
     <EndScreen v-else-if="w.ended" />
   </div>
@@ -181,6 +203,12 @@ function newGame() {
   .scroll { scrollbar-color: transparent transparent; }
   .side:hover .scroll { scrollbar-color: var(--ink) transparent; }
 }
+/* Resources left to give out, pinned under the scrolling part of the Dossier. */
+.res { margin-top: auto; flex: none; border-top: 1px solid var(--ink); padding-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.res dl { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 14px; margin: 0; font-size: 12.5px; }
+.res dt { color: var(--muted); }
+.res dt small { display: block; font-size: 10.5px; }
+.res dd { margin: 0; font: 500 12px var(--font-data); text-align: right; align-self: start; }
 .tabs { display: flex; gap: 2px; }
 .tabs button { flex: 1; padding: 6px 8px; text-transform: uppercase; letter-spacing: .08em; font-size: 11px; }
 .tabs button[aria-selected='true'] { background: var(--tag); color: var(--paper); border-color: var(--tag); }

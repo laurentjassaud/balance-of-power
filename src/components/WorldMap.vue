@@ -100,7 +100,10 @@ function drawLabels(ctx: CanvasRenderingContext2D) {
   const order = Object.keys(anchor).map(Number)
     .filter((i) => anchor[i][2] >= minCells || i === sel)
     .sort((a, b) => +(b === sel) - +(a === sel) || anchor[b][2] - anchor[a][2])
+  ctx.save()
   ctx.textBaseline = 'middle'
+  // Round joins on the names' halo: the default mitre sticks out in spikes at the letters' sharp corners.
+  ctx.lineJoin = 'round'
   for (const i of order) {
     const [x, y] = anchor[i], sx = T.x + (x + 0.5) * cs * T.k, sy = T.y + (y + 0.5) * cs * T.k
     if (sx < 0 || sy < 0 || sx > W || sy > H) continue
@@ -121,6 +124,7 @@ function drawLabels(ctx: CanvasRenderingContext2D) {
     ctx.font = `500 ${fs - 1}px ${mono}`; ctx.fillStyle = i === sel ? css('--accent') : css('--paper')
     ctx.fillText(val, tx + 7 + nw, sy + 0.5)
   }
+  ctx.restore()
 }
 
 /** Country under a point of the canvas, or 0 for sea. */
@@ -143,7 +147,8 @@ function move(e: PointerEvent) {
   tip.value = c && store.w ? { x: Math.min(e.clientX - r.left, W - 190), y: e.clientY - r.top, name: store.w.names[c], v: store.classify(c).v } : null
 }
 function up(e: PointerEvent) {
-  if (drag && !drag.moved) { const c = hit(e); if (c) { store.selected = c; store.tab = 'country' } else store.selected = 0 }
+  // A click on the selected country, or off the countries, clears the selection.
+  if (drag && !drag.moved) { const c = hit(e); if (c && c !== store.selected) { store.selected = c; store.tab = 'country' } else store.selected = 0 }
   drag = null
 }
 function zoomAt(f: number, px = W / 2, py = H / 2) {

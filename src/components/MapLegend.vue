@@ -1,5 +1,6 @@
 <script setup lang="ts">
-// Stepped legend after the atlas: one swatch per class, its label and how many countries fall in it.
+// Stepped legend after the atlas: one swatch per class, its label and how many countries fall in it
+// (not on background figures, whose quintile classes always hold about sixteen countries each).
 // When the superpowers keep their own colour, each sits at its own end of the scale: the rival above, the player below.
 import { computed } from 'vue'
 import { useGameStore } from '../stores/game'
@@ -17,7 +18,7 @@ const rank = computed(() => store.bgRank(store.selected))
     </div>
     <div v-if="store.fixedSuper" class="row sup"><i class="s"></i><span>{{ name(store.rival) }}</span></div>
     <div v-for="(c, k) in store.legend.colors" :key="k" class="row">
-      <i :style="{ background: c }"></i><span>{{ store.legend.labels[k] }}</span><b class="num">{{ store.legend.counts[k] }}</b>
+      <i :style="{ background: c }"></i><span>{{ store.legend.labels[k] }}</span><b v-if="!store.bgInd" class="num">{{ store.legend.counts[k] }}</b>
     </div>
     <div v-if="store.fixedSuper" class="row sup"><i class="u"></i><span>{{ name(store.me) }}</span></div>
     <p v-if="store.needsSel" class="pick">Choisissez un pays sur la carte.</p>
