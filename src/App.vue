@@ -64,7 +64,7 @@ function newGame() {
       </dl>
       <div class="actions">
         <span v-if="w.twoPlayer" class="label turn">Au tour de <span :class="w.human === USA ? 'usa' : 'ussr'">{{ sideName(w.human) }}</span></span>
-        <button v-if="w.twoPlayer && w.human === USA" id="handover" class="primary" :disabled="busy || !!w.ended" @click="store.handOver()">Passer la main à l’URSS</button>
+        <button v-if="w.twoPlayer && !w.handedOver" id="handover" class="primary" :disabled="busy || !!w.ended" @click="store.handOver()">Passer la main {{ w.human === USA ? 'à l’URSS' : 'aux États-Unis' }}</button>
         <button v-else id="next-turn" class="primary" :disabled="busy || !!w.ended" @click="store.nextTurn()">Année suivante</button>
       </div>
       <div class="mode">

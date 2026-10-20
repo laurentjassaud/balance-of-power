@@ -60,6 +60,8 @@ export class Crisis {
   loser = 0
   war = false
   accident = false
+  /** True when the challenged action was cancelled. */
+  revoked = false
   /** Superpower that must decide now (the human, or the current player in two-player mode). */
   decider: number
 
@@ -81,6 +83,7 @@ export class Crisis {
     if (kind === 'minor') {
       w.chgDMess(this.victim, w.human === USA ? 1 : -1)
       this.minorTurn()
+      if (this.over) w.calcScores()
       return
     }
     // In two-player mode the author of the action answers first.
@@ -156,13 +159,27 @@ export class Crisis {
     this.over = true
   }
 
-  /** The challenged action is cancelled. */
+  /**
+   * The challenged action is cancelled. As in the original, the news item's values are swapped first, so that
+   * the news insertion replaces it with a withdrawal ("X withdraws…", marked as a crisis item) instead of
+   * deleting it. The item kept by the crisis then gets its values back, for the crisis window.
+   */
   private revoke(): void {
+    const it = this.item
     const tmp = this.newVal
     this.newVal = this.oldVal
     this.oldVal = tmp
-    this.item.crisis = true
+    it.crisis = true
+    ;[it.oldVal, it.newVal] = [it.newVal, it.oldVal]
     this.w.doPolicy(this.who, this.verb, this.victim, this.newVal, true)
+    ;[it.oldVal, it.newVal] = [it.newVal, it.oldVal]
+    this.revoked = true
+  }
+
+  /** The withdrawal news item left by a cancelled action, if any. */
+  withdrawal(): NewsItem | undefined {
+    if (!this.revoked) return undefined
+    return this.w.news.find((n) => n.subject === this.who && n.verb === this.verb && n.object === this.victim && n !== this.item)
   }
 
   private computerTurn(): void {
@@ -236,6 +253,8 @@ export class Crisis {
         this.loser = w.human
         this.over = true
       }
+      // as MinorCrisis does, the scores are brought up to date once it ends
+      if (this.over) w.calcScores()
       return
     }
     const me = this.decider

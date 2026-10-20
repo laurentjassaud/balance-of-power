@@ -85,6 +85,8 @@ export interface NewsItem {
   host: number
   crisis: boolean
   worth: number
+  /** Set once the human has questioned this action of a minor country, so that it cannot be questioned again. */
+  questioned?: boolean
 }
 
 /** A year of a country's history. Per country arrays; [superpower][country] for the policies of USA (1) and USSR (2). */
@@ -120,6 +122,8 @@ export class World {
   human = USA
   cmptr = USSR
   twoPlayer = false
+  /** Two-player mode: the mouse has changed hands this year (the original's TwoPActF); a new year needs it. */
+  handedOver = false
   year = FIRST_YEAR - 1
   rng: Rng
 
@@ -492,7 +496,9 @@ export class World {
         x = 8 * newVal
         break
       case Verb.Trade:
-        x = 0
+        // The original has no case for trade (its value is left undefined). A value of 0 would make the computer
+        // react to almost every trade increase, so trade gets the fallback the original uses for aid and troops.
+        x = oldVal - newVal
         break
     }
     return clamp(x, -127, 127)

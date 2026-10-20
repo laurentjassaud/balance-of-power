@@ -134,6 +134,38 @@ function initCountry(w: World, id: number, name: string, p: number[]): void {
   }
 }
 
+/**
+ * Policies of minor countries set directly in the data procedures of Init.p (not through SetStance):
+ * [policy, giver, target, value]. The last two, Iraq's support of the Iranian rebels, are inside `IF Level=4`.
+ */
+const MINOR_POLICIES: ['miltAid' | 'insgAid' | 'intvGovt' | 'intvRebl', number, number, number][] = [
+  ['insgAid', 4, 5, 3], // Honduras arms the Contras
+  ['insgAid', 5, 64, 1], // Nicaragua arms the Salvadoran rebels
+  ['miltAid', 7, 5, 2], // Cuba arms Nicaragua
+  ['miltAid', 7, 42, 3], // Cuba in Angola
+  ['intvGovt', 7, 42, 3],
+  ['intvGovt', 7, 36, 3], // Cuban troops in Ethiopia
+  ['intvGovt', 7, 40, 2], // ... Mozambique
+  ['intvGovt', 7, 75, 2], // ... Congo
+  ['intvGovt', 7, 32, 2], // ... Libya
+  ['miltAid', 17, 40, 3], // United Kingdom arms Mozambique
+  ['miltAid', 18, 72, 2], // France in Chad
+  ['intvGovt', 18, 72, 2],
+  ['insgAid', 27, 40, 2], // South Africa arms RENAMO
+  ['insgAid', 27, 42, 2], // South Africa with UNITA
+  ['intvRebl', 27, 42, 2],
+  ['insgAid', 27, 76, 1], // South Africa arms Zimbabwean rebels
+  ['insgAid', 32, 72, 3], // Libya with the Chadian rebels
+  ['intvRebl', 32, 72, 3],
+  ['intvGovt', 39, 40, 2], // Tanzanian troops in Mozambique
+  ['insgAid', 41, 27, 1], // Zambia arms the ANC
+  ['insgAid', 47, 56, 2], // China arms the Afghan mujahideen
+  ['insgAid', 76, 27, 1], // Zimbabwe arms the ANC
+  ['insgAid', 77, 27, 1], // Botswana arms the ANC
+  ['intvRebl', 53, 55, 4], // Iraq with the Iranian rebels
+  ['insgAid', 53, 55, 3],
+]
+
 function randomAdjust(w: World, value: number, hi: number, lo: number, divisor: number): number {
   return clamp(value + div(w.random(), divisor), lo, hi)
 }
@@ -183,6 +215,13 @@ export function createWorld(opts: NewGameOptions): World {
       case 'sphere':
         w.minorSph[o.a][o.b] = true
         break
+    }
+  }
+  // Minor countries act only at level 4; below it the original never reads these policies.
+  if (w.level === 4) {
+    for (const [arr, giver, target, v] of MINOR_POLICIES) {
+      const m = arr === 'miltAid' ? w.miltAid : arr === 'insgAid' ? w.insgAid : arr === 'intvGovt' ? w.intvGovt : w.intvRebl
+      m[giver][target] = v
     }
   }
 

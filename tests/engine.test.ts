@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { Game, verbsForLevel } from '../src/engine/game'
 import { NO_CNTRY, USA, USSR, Verb, type Level, type NewsItem } from '../src/engine/core'
 import { advise } from '../src/engine/news'
+import { Crisis } from '../src/engine/crisis'
 import { journal, frenchify } from '../src/engine/journal'
 import { INDICATORS, bgValue, bgFormat } from '../src/engine/background'
 import { ARCHIVES } from '../src/engine/archives'
@@ -286,5 +287,143 @@ describe('crises', () => {
       expect(g.crisis).toBeNull()
     }
     expect(seen).toBeGreaterThan(0)
+  })
+})
+
+describe('trade', () => {
+  it('counts as a mild help, so the computer rarely questions a trade increase', () => {
+    const g = new Game({ level: 4, human: USA, seed: 1 })
+    expect(g.w.hurt(Verb.Trade, 17, 4, 5)).toBe(-1)
+    let tries = 0, crises = 0
+    for (let seed = 1; seed <= 200; seed++) {
+      const g = new Game({ level: 4, human: USA, seed })
+      const c = 3 + (seed % 78)
+      const lim = g.limits(c, Verb.Trade)
+      if (lim.max <= lim.current || !g.setPolicy(c, Verb.Trade, lim.current + 1)) continue
+      tries++
+      g.nextTurn()
+      let hit = false
+      for (let k = 0; g.crisis && k < 500; k++) {
+        if (!g.crisis.over) { if (g.crisis.verb === Verb.Trade) hit = true; g.respondCrisis(false) } else g.closeCrisis()
+      }
+      if (hit) crises++
+    }
+    expect(tries).toBeGreaterThan(100)
+    // with a value of 0 the computer questioned about 98 % of them
+    expect(crises / tries).toBeLessThan(0.5)
+  })
+})
+
+describe('initial minor-country policies', () => {
+  it('are set at level 4, with the resources they commit, and left out below', () => {
+    const at4 = new Game({ level: 4, human: USA, seed: 3 }).w
+    // the first year has been played: wars are never reset by MinorAI, so Iraq still backs the Iranian rebels
+    expect(at4.intvRebl[53][55]).toBe(4)
+    expect(at4.insgAid[53][55]).toBe(3)
+    // Zambia's aid to the ANC is outside its sphere, so it lasts too
+    expect(at4.insgAid[41][27]).toBe(1)
+    const at3 = new Game({ level: 3, human: USA, seed: 3 }).w
+    expect(at3.intvRebl[53][55]).toBe(0)
+    expect(at3.insgAid[41][27]).toBe(0)
+  })
+})
+
+describe('questioning a minor country', () => {
+  it('needs an influence above 3 over it, as in the original', () => {
+    let checked = 0
+    for (let seed = 1; seed <= 30 && checked < 20; seed++) {
+      const g = new Game({ level: 4, human: USA, seed })
+      const w = g.w
+      for (const it of w.news) {
+        if (it.subject <= 2 || it.subject === it.object || it.newVal <= it.oldVal || it.verb === Verb.Trade) continue
+        checked++
+        expect(g.canChallenge(it)).toBe(w.influence(w.human, it.subject) > 3)
+      }
+    }
+    expect(checked).toBeGreaterThan(0)
+  })
+
+  it('works on the moves of MinorAI, once per action', () => {
+    let seen = 0
+    for (let seed = 1; seed <= 300 && seen < 5; seed++) {
+      const g = new Game({ level: 4, human: USA, seed })
+      const it = g.w.news.find((n) => n.subject > 2 && n.crisis && g.canChallenge(n))
+      if (!it) continue
+      seen++
+      const c = g.challenge(it)!
+      while (!c.over) c.respond(false)
+      g.closeCrisis()
+      expect(g.canChallenge(it)).toBe(false)
+    }
+    expect(seen).toBeGreaterThan(0)
+  })
+})
+
+function settleAll(g: Game) {
+  for (let k = 0; g.crisis && k < 500; k++) if (!g.crisis.over) g.respondCrisis(false); else g.closeCrisis()
+}
+
+describe('end of a crisis', () => {
+  it('a cancelled action stays in the news as a withdrawal, as in the original', () => {
+    let seen = 0
+    for (let seed = 1; seed <= 200 && seen < 5; seed++) {
+      const g = new Game({ level: 3, human: USA, seed })
+      const w = g.w
+      // a provocative move: arms to the rebels of a Soviet ally
+      const target = [7, 56, 44, 48, 42, 40, 32, 50][seed % 8]
+      const lim = g.limits(target, Verb.InsgAid)
+      if (!g.setPolicy(target, Verb.InsgAid, lim.max)) continue
+      g.nextTurn()
+      const c = g.crisis
+      if (!c || c.who !== USA || c.item.object !== target) continue
+      const { oldVal, newVal } = c.item
+      c.respond(false) // the player backs down at level 9: the move is cancelled
+      expect(c.revoked).toBe(true)
+      seen++
+      expect([c.item.oldVal, c.item.newVal]).toEqual([oldVal, newVal])
+      const wd = c.withdrawal()!
+      expect(w.news).toContain(wd)
+      expect([wd.oldVal, wd.newVal, wd.crisis]).toEqual([newVal, oldVal, true])
+      expect(w.getPolicy(USA, Verb.InsgAid, target)).toBe(oldVal)
+      g.closeCrisis()
+      settleAll(g)
+    }
+    expect(seen).toBeGreaterThan(0)
+  })
+
+  it('a crisis with a minor country leaves the scores up to date', () => {
+    let seen = 0
+    for (let seed = 1; seed <= 200 && seen < 5; seed++) {
+      const g = new Game({ level: 4, human: USA, seed })
+      const w = g.w
+      const it = w.news.find((n) => n.subject > 2 && n.subject !== n.object && n.newVal > n.oldVal)
+      if (!it) continue
+      const c = new Crisis(w, it, 'minor')
+      while (!c.over) c.respond(true)
+      seen++
+      const [usa, ussr] = [w.usaStrng, w.ussrStrng]
+      w.calcScores()
+      expect([w.usaStrng, w.ussrStrng]).toEqual([usa, ussr])
+    }
+    expect(seen).toBeGreaterThan(0)
+  })
+})
+
+describe('two players', () => {
+  it('need a hand-over every year, and take turns at playing first', () => {
+    const g = new Game({ level: 2, human: USA, twoPlayer: true, seed: 5 })
+    const w = g.w
+    const year = w.year
+    g.nextTurn()
+    expect(w.year).toBe(year) // nobody has handed over yet
+    const firsts: number[] = []
+    for (let t = 0; t < 4; t++) {
+      firsts.push(w.human)
+      g.handOver()
+      g.nextTurn()
+      for (let k = 0; g.crisis && k < 500; k++) if (!g.crisis.over) g.respondCrisis(false); else g.closeCrisis()
+    }
+    expect(w.year).toBe(year + 4)
+    expect(firsts).toEqual([USA, USSR, USA, USSR])
   })
 })

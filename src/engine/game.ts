@@ -50,7 +50,7 @@ export class Game {
   constructor(opts: NewGameOptions) {
     this.w = createWorld(opts)
     // The first year is played automatically to set the baseline.
-    this.nextTurn()
+    this.advance()
   }
 
   get over(): boolean {
@@ -87,12 +87,21 @@ export class Game {
 
   // ---------------------------------------------------------------- turn sequence
 
+  /**
+   * Ends the year. In two-player mode both sides must have played: the mouse has to change hands at least once.
+   * It is not handed back at the new year, so the side that played second starts the next one, as in the original.
+   */
   nextTurn(): void {
-    const w = this.w
     if (this.over || this.crisis || this.reacting) return
+    if (this.w.twoPlayer && !this.w.handedOver) return
+    this.advance()
+  }
+
+  private advance(): void {
+    const w = this.w
     // The year just played goes into the history, with the player's moves and its events (as the original saved it here).
     if (w.year >= FIRST_YEAR) w.recordYear()
-    if (w.twoPlayer && w.human !== USA) this.handOver()
+    w.handedOver = false
     prePlanMove(w)
     this.reactQueue = [...w.news]
     this.reactIdx = 0
@@ -145,6 +154,8 @@ export class Game {
   /** Two-player mode: the other superpower takes the keyboard. */
   handOver(): void {
     const w = this.w
+    if (!w.twoPlayer || this.over || this.crisis || this.reacting) return
+    w.handedOver = true
     w.human = 3 - w.human
     w.cmptr = 3 - w.cmptr
   }
@@ -154,14 +165,17 @@ export class Game {
   canChallenge(it: NewsItem): boolean {
     const w = this.w
     if (this.over || this.crisis || this.reacting) return false
-    if (it.crisis || it.subject === w.human || it.subject === it.object || it.newVal <= it.oldVal) return false
+    if (it.subject === w.human || it.subject === it.object || it.newVal <= it.oldVal) return false
     if (it.verb === Verb.Trade) return false
-    if (it.subject === w.cmptr) return true
-    return w.level === 4 && it.subject > 2
+    if (it.subject === w.cmptr) return !it.crisis
+    // A minor country can be questioned only by a superpower with some hold on it, as in the original. The original
+    // ignores the crisis mark here (MinorAI marks all its moves with it); an action is questioned only once, though.
+    return w.level === 4 && it.subject > 2 && !it.questioned && w.influence(w.human, it.subject) > 3
   }
 
   challenge(it: NewsItem): Crisis | null {
     if (!this.canChallenge(it)) return null
+    if (it.subject > 2) it.questioned = true
     this.crisis = new Crisis(this.w, it, it.subject <= 2 ? 'super' : 'minor')
     return this.crisis
   }
@@ -173,6 +187,9 @@ export class Game {
   /** Called by the interface once the outcome of a finished crisis has been shown. */
   closeCrisis(): void {
     if (!this.crisis?.over) return
+    // A cancelled action leaves a withdrawal in the news; as in the original, the reactions still to come see it.
+    const wd = this.reacting ? this.crisis.withdrawal() : undefined
+    if (wd && !this.reactQueue.includes(wd)) this.reactQueue.splice(this.reactIdx, 0, wd)
     this.crisis = null
     if (this.reacting && !this.over) this.react()
   }
