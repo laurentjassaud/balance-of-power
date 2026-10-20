@@ -3,7 +3,7 @@ import { Game, verbsForLevel } from '../src/engine/game'
 import { NO_CNTRY, USA, USSR, Verb, type Level, type NewsItem } from '../src/engine/core'
 import { advise } from '../src/engine/news'
 import { Crisis } from '../src/engine/crisis'
-import { journal, frenchify } from '../src/engine/journal'
+import { journal, frenchify, leaderOf, eventOf } from '../src/engine/journal'
 import { INDICATORS, bgValue, bgFormat } from '../src/engine/background'
 import { ARCHIVES } from '../src/engine/archives'
 import { FIRST_YEAR } from '../src/engine/core'
@@ -215,6 +215,34 @@ describe('newspaper', () => {
           }
         }
       }
+    }
+  })
+
+  it('names the leader of the year and its real event, from the references file', () => {
+    const g = new Game({ level: 1, human: USA, seed: 41 })
+    const w = g.w
+    expect(leaderOf(2, 1984).nom).toBe('Tchernenko')
+    expect(leaderOf(2, 1985).nom).toBe('Gorbatchev')
+    expect(leaderOf(1, 1989).nom).toBe('Bush')
+    const bad = /\s[,.]| [;:!?»]|« |\s{2}/
+    for (let year = FIRST_YEAR; year <= LAST_YEAR; year++) {
+      w.year = year
+      for (let c = 1; c <= NO_CNTRY; c++) {
+        const p = journal(w, c)
+        expect(p.chronicle, `${c} ${year}`).toBeTruthy()
+        expect(p.chronicle!, `${c} ${year}`).not.toMatch(bad)
+        expect(eventOf(c, year)).toBeTruthy()
+      }
+    }
+    // the leader is named while the original regime holds, and only then
+    w.year = 1985
+    w.virgin[2] = true
+    w.cntryRnd[2] = 1
+    w.cntryRnd[1] = 1
+    for (let k = 0; k < 64; k++) {
+      w.cntryRnd[2] = k * 997
+      const t = journal(w, 2).front + journal(w, 2).close
+      if (t.includes('secrétaire général')) { expect(t).toContain('Gorbatchev'); break }
     }
   })
 

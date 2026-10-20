@@ -1,0 +1,1735 @@
+{
+  "_aide": [
+    "Références du journal de chaque pays. Ce fichier remplace la table de l'original (STR 1001–1080) : on peut le modifier librement.",
+    "adjectif, capitale : remplacent / et @ dans les titres.",
+    "oppositionGauche : l'opposition citée (%) quand la droite gouverne ; oppositionDroite : celle citée quand la gauche gouverne.",
+    "dirigeants : chaque entrée vaut à partir de l'année « depuis », jusqu'à la suivante. Règle suivie : le dirigeant en fonctions le 1er juillet de l'année. Le titre et le nom remplacent & ; le nom n'est cité que tant que le régime d'origine tient dans la partie (ni coup d'État ni révolution).",
+    "evenements : un fait réel par année (1982–1992), affiché dans la rubrique « Chronique » du journal de l'année. Une année sans entrée n'affiche pas de chronique."
+  ],
+  "pays": {
+    "1": {
+      "nom": "États-Unis", "adjectif": "américain", "capitale": "Washington",
+      "oppositionGauche": "le Parti démocrate", "oppositionDroite": "le Parti républicain",
+      "dirigeants": [
+        { "depuis": 1981, "titre": "le président", "nom": "Reagan" },
+        { "depuis": 1989, "titre": "le président", "nom": "Bush" }
+      ],
+      "evenements": {
+        "1982": "Récession : le chômage dépasse 10 %, du jamais-vu depuis la guerre.",
+        "1983": "Reagan lance l’Initiative de défense stratégique et envoie les troupes à la Grenade.",
+        "1984": "Reagan est réélu dans un raz-de-marée face à Walter Mondale.",
+        "1985": "Premier sommet Reagan–Gorbatchev à Genève.",
+        "1986": "Explosion de la navette Challenger ; l’affaire Iran-Contra éclate.",
+        "1987": "Signature du traité sur les forces nucléaires intermédiaires ; krach boursier du « lundi noir ».",
+        "1988": "George Bush est élu président face à Michael Dukakis.",
+        "1989": "Les troupes américaines envahissent le Panama pour renverser Noriega.",
+        "1990": "Déploiement massif dans le Golfe après l’invasion du Koweït.",
+        "1991": "Guerre du Golfe : la coalition menée par les États-Unis libère le Koweït.",
+        "1992": "Émeutes de Los Angeles ; Bill Clinton est élu président."
+      }
+    },
+    "2": {
+      "nom": "URSS", "adjectif": "soviétique", "capitale": "Moscou",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "les militants des droits de l’homme",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le secrétaire général", "nom": "Brejnev" },
+        { "depuis": 1983, "titre": "le secrétaire général", "nom": "Andropov" },
+        { "depuis": 1984, "titre": "le secrétaire général", "nom": "Tchernenko" },
+        { "depuis": 1985, "titre": "le secrétaire général", "nom": "Gorbatchev" },
+        { "depuis": 1990, "titre": "le président", "nom": "Gorbatchev" },
+        { "depuis": 1992, "titre": "le président", "nom": "Eltsine" }
+      ],
+      "evenements": {
+        "1982": "Mort de Léonid Brejnev ; Iouri Andropov lui succède.",
+        "1983": "La chasse soviétique abat le Boeing 007 de la Korean Air Lines.",
+        "1984": "Mort d’Andropov ; boycott des Jeux olympiques de Los Angeles.",
+        "1985": "Mikhaïl Gorbatchev arrive au pouvoir et lance la perestroïka.",
+        "1986": "Catastrophe nucléaire de Tchernobyl ; sommet de Reykjavik.",
+        "1987": "Traité FNI avec Washington ; Mathias Rust pose son avion sur la place Rouge.",
+        "1988": "Début du retrait d’Afghanistan ; séisme meurtrier en Arménie.",
+        "1989": "Premières élections semi-libres ; le dernier soldat soviétique quitte l’Afghanistan.",
+        "1990": "Gorbatchev devient président de l’URSS ; la Lituanie proclame son indépendance.",
+        "1991": "Putsch manqué en août ; dissolution de l’URSS en décembre.",
+        "1992": "La Russie de Boris Eltsine se lance dans la « thérapie de choc »."
+      }
+    },
+    "3": {
+      "nom": "Mexique", "adjectif": "mexicain", "capitale": "Mexico",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "López Portillo" },
+        { "depuis": 1983, "titre": "le président", "nom": "de la Madrid" },
+        { "depuis": 1989, "titre": "le président", "nom": "Salinas" }
+      ],
+      "evenements": {
+        "1982": "Crise de la dette : le Mexique suspend ses paiements et nationalise ses banques.",
+        "1983": "Miguel de la Madrid applique un sévère plan d’austérité négocié avec le FMI.",
+        "1984": "Explosion d’un dépôt de gaz à San Juan Ixhuatepec : des centaines de morts.",
+        "1985": "Un séisme dévaste Mexico.",
+        "1986": "Le Mexique adhère au GATT et accueille la Coupe du monde de football.",
+        "1987": "Krach de la Bourse de Mexico ; pacte de solidarité contre l’inflation.",
+        "1988": "Élection contestée de Carlos Salinas face à Cuauhtémoc Cárdenas.",
+        "1989": "Pour la première fois, le PRI perd un État, la Basse-Californie.",
+        "1990": "Ouverture des négociations de libre-échange avec les États-Unis.",
+        "1991": "Les banques nationalisées en 1982 sont privatisées.",
+        "1992": "Signature de l’ALENA avec les États-Unis et le Canada."
+      }
+    },
+    "4": {
+      "nom": "Honduras", "adjectif": "hondurien", "capitale": "Tegucigalpa",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "les Miskitos",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Suazo Córdova" },
+        { "depuis": 1986, "titre": "le président", "nom": "Azcona" },
+        { "depuis": 1990, "titre": "le président", "nom": "Callejas" }
+      ],
+      "evenements": {
+        "1982": "Retour d’un président civil, Roberto Suazo Córdova, et nouvelle Constitution.",
+        "1983": "Grandes manœuvres militaires américano-honduriennes ; les contras s’installent à la frontière.",
+        "1984": "Le général Álvarez Martínez, chef de l’armée, est destitué par ses officiers.",
+        "1985": "Crise constitutionnelle autour des élections ; José Azcona est élu.",
+        "1986": "Passation du pouvoir entre deux présidents civils élus.",
+        "1987": "Le Honduras signe les accords de paix d’Esquipulas II.",
+        "1988": "Émeute contre l’ambassade des États-Unis après l’extradition d’un trafiquant.",
+        "1989": "Rafael Leonardo Callejas est élu président.",
+        "1990": "Plan d’ajustement économique ; démobilisation des contras réfugiés au Honduras.",
+        "1991": "Signature à Tegucigalpa du protocole du Système d’intégration centraméricain.",
+        "1992": "La Cour internationale de justice tranche le différend frontalier avec le Salvador."
+      }
+    },
+    "5": {
+      "nom": "Nicaragua", "adjectif": "nicaraguayen", "capitale": "Managua",
+      "oppositionGauche": "les sandinistes", "oppositionDroite": "les contras",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le coordinateur de la junte", "nom": "Ortega" },
+        { "depuis": 1985, "titre": "le président", "nom": "Ortega" },
+        { "depuis": 1990, "titre": "la présidente", "nom": "Chamorro" }
+      ],
+      "evenements": {
+        "1982": "État d’urgence face aux premières attaques des contras.",
+        "1983": "Visite du pape Jean-Paul II, chahutée par des militants sandinistes.",
+        "1984": "La CIA mine les ports ; Daniel Ortega est élu président.",
+        "1985": "Les États-Unis décrètent un embargo commercial total.",
+        "1986": "La Cour internationale de justice condamne les États-Unis pour leur soutien aux contras.",
+        "1987": "Nouvelle Constitution ; signature des accords d’Esquipulas II.",
+        "1988": "Cessez-le-feu de Sapoá avec les contras ; l’ouragan Joan ravage le pays.",
+        "1989": "Accord pour des élections libres et la démobilisation des contras.",
+        "1990": "Défaite des sandinistes : Violeta Chamorro est élue présidente.",
+        "1991": "Hyperinflation ; d’anciens contras reprennent les armes dans le nord.",
+        "1992": "Un séisme et un raz-de-marée frappent la côte pacifique."
+      }
+    },
+    "6": {
+      "nom": "Panama", "adjectif": "panaméen", "capitale": "Panama",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Paredes" },
+        { "depuis": 1984, "titre": "le général", "nom": "Noriega" },
+        { "depuis": 1990, "titre": "le président", "nom": "Endara" }
+      ],
+      "evenements": {
+        "1982": "Le général Rubén Darío Paredes prend la tête de la Garde nationale ; le président Royo démissionne.",
+        "1983": "Manuel Noriega succède à Paredes à la tête des forces armées.",
+        "1984": "Élection frauduleuse de Nicolás Ardito Barletta, candidat des militaires.",
+        "1985": "Assassinat de l’opposant Hugo Spadafora ; Barletta est contraint à la démission.",
+        "1986": "La presse américaine révèle les liens de Noriega avec le trafic de drogue.",
+        "1987": "Manifestations de la Croisade civique contre Noriega ; état d’urgence.",
+        "1988": "Noriega est inculpé pour trafic de drogue aux États-Unis ; sanctions économiques.",
+        "1989": "Noriega annule les élections ; les troupes américaines envahissent le pays.",
+        "1990": "Noriega se rend ; Guillermo Endara gouverne, l’armée est dissoute.",
+        "1991": "Rupture entre le président Endara et ses alliés démocrates-chrétiens.",
+        "1992": "Noriega est condamné à 40 ans de prison à Miami."
+      }
+    },
+    "7": {
+      "nom": "Cuba", "adjectif": "cubain", "capitale": "La Havane",
+      "oppositionGauche": "le mouvement castriste", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Castro" }
+      ],
+      "evenements": {
+        "1982": "Washington inscrit Cuba sur sa liste des États soutenant le terrorisme.",
+        "1983": "Des coopérants cubains sont tués lors de l’invasion américaine de la Grenade.",
+        "1984": "Accord migratoire avec les États-Unis.",
+        "1985": "Lancement de Radio Martí depuis la Floride ; La Havane suspend l’accord migratoire.",
+        "1986": "Castro lance la « rectification des erreurs » contre les réformes de marché.",
+        "1987": "Les troupes cubaines s’engagent dans la bataille de Cuito Cuanavale, en Angola.",
+        "1988": "Accords de New York : les troupes cubaines quitteront l’Angola.",
+        "1989": "Le général Arnaldo Ochoa est jugé et fusillé pour trafic de drogue.",
+        "1990": "Début de la « période spéciale » après la fin de l’aide soviétique.",
+        "1991": "Moscou annonce le retrait de sa brigade ; La Havane accueille les Jeux panaméricains.",
+        "1992": "La loi Torricelli durcit l’embargo américain."
+      }
+    },
+    "8": {
+      "nom": "Argentine", "adjectif": "argentin", "capitale": "Buenos Aires",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "les péronistes",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Bignone" },
+        { "depuis": 1984, "titre": "le président", "nom": "Alfonsín" },
+        { "depuis": 1990, "titre": "le président", "nom": "Menem" }
+      ],
+      "evenements": {
+        "1982": "Guerre des Malouines : défaite face au Royaume-Uni et chute du général Galtieri.",
+        "1983": "Retour de la démocratie : Raúl Alfonsín est élu président.",
+        "1984": "Le rapport « Nunca más » recense les disparus de la dictature.",
+        "1985": "Procès des juntes : Videla et Massera condamnés à perpétuité ; plan Austral.",
+        "1986": "L’Argentine remporte la Coupe du monde ; loi du « point final ».",
+        "1987": "Soulèvement militaire de la Semaine sainte ; loi d’« obéissance due ».",
+        "1988": "Nouvelles rébellions militaires des « carapintadas ».",
+        "1989": "Hyperinflation et pillages ; Carlos Menem est élu.",
+        "1990": "Menem gracie les chefs militaires ; dernière rébellion carapintada écrasée.",
+        "1991": "Plan de convertibilité : le peso est arrimé au dollar.",
+        "1992": "Attentat contre l’ambassade d’Israël à Buenos Aires."
+      }
+    },
+    "9": {
+      "nom": "Colombie", "adjectif": "colombien", "capitale": "Bogota",
+      "oppositionGauche": "le M-19", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Turbay Ayala" },
+        { "depuis": 1983, "titre": "le président", "nom": "Betancur" },
+        { "depuis": 1987, "titre": "le président", "nom": "Barco" },
+        { "depuis": 1991, "titre": "le président", "nom": "Gaviria" }
+      ],
+      "evenements": {
+        "1982": "Belisario Betancur est élu et propose une amnistie aux guérillas.",
+        "1983": "Un séisme détruit une grande partie de Popayán.",
+        "1984": "Assassinat du ministre de la Justice Rodrigo Lara Bonilla ; trêve avec les FARC.",
+        "1985": "Le M-19 prend le palais de justice ; l’éruption du Nevado del Ruiz rase Armero.",
+        "1986": "Virgilio Barco est élu ; les militants de l’Union patriotique sont assassinés en série.",
+        "1987": "Assassinat de Jaime Pardo Leal, chef de l’Union patriotique.",
+        "1988": "Le M-19 enlève l’homme politique Álvaro Gómez.",
+        "1989": "Assassinat du candidat Luis Carlos Galán ; vague d’attentats du cartel de Medellín.",
+        "1990": "Le M-19 dépose les armes ; César Gaviria est élu président.",
+        "1991": "Nouvelle Constitution ; Pablo Escobar se rend.",
+        "1992": "Pablo Escobar s’évade de sa prison de La Catedral."
+      }
+    },
+    "10": {
+      "nom": "Pérou", "adjectif": "péruvien", "capitale": "Lima",
+      "oppositionGauche": "le Sentier lumineux", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Belaúnde Terry" },
+        { "depuis": 1986, "titre": "le président", "nom": "García" },
+        { "depuis": 1991, "titre": "le président", "nom": "Fujimori" }
+      ],
+      "evenements": {
+        "1982": "Le Sentier lumineux attaque la prison d’Ayacucho.",
+        "1983": "Massacre d’Uchuraccay : huit journalistes sont tués dans les Andes.",
+        "1984": "Le MRTA prend les armes ; l’armée multiplie les exactions dans les Andes.",
+        "1985": "Alan García est élu et limite le service de la dette à 10 % des exportations.",
+        "1986": "Les mutineries des prisons de Lima sont écrasées : plus de deux cents détenus tués.",
+        "1987": "Alan García nationalise les banques.",
+        "1988": "L’hyperinflation fait s’effondrer l’économie.",
+        "1989": "Le Sentier lumineux étend la guerre aux villes ; l’inflation dépasse 2 000 %.",
+        "1990": "Alberto Fujimori est élu et impose le « fujichoc ».",
+        "1991": "Une épidémie de choléra frappe le pays.",
+        "1992": "Autocoup d’État de Fujimori ; capture d’Abimael Guzmán, chef du Sentier lumineux."
+      }
+    },
+    "11": {
+      "nom": "Venezuela", "adjectif": "vénézuélien", "capitale": "Caracas",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Herrera Campíns" },
+        { "depuis": 1984, "titre": "le président", "nom": "Lusinchi" },
+        { "depuis": 1989, "titre": "le président", "nom": "Pérez" }
+      ],
+      "evenements": {
+        "1982": "Caracas relance sa revendication sur l’Essequibo, territoire du Guyana.",
+        "1983": "« Vendredi noir » : le bolivar est dévalué.",
+        "1984": "Jaime Lusinchi entre en fonctions et négocie la dette extérieure.",
+        "1985": "Renégociation de la dette avec les banques créancières.",
+        "1986": "La chute des cours du pétrole fait s’effondrer les recettes.",
+        "1987": "Incident naval avec la Colombie dans le golfe du Venezuela.",
+        "1988": "Carlos Andrés Pérez est élu pour un second mandat.",
+        "1989": "« Caracazo » : émeutes sanglantes contre les mesures d’austérité.",
+        "1990": "La hausse du pétrole pendant la crise du Golfe renfloue les caisses.",
+        "1991": "Croissance record portée par le pétrole.",
+        "1992": "Deux tentatives de coup d’État, dont celle du lieutenant-colonel Hugo Chávez."
+      }
+    },
+    "12": {
+      "nom": "Brésil", "adjectif": "brésilien", "capitale": "Brasilia",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Figueiredo" },
+        { "depuis": 1985, "titre": "le président", "nom": "Sarney" },
+        { "depuis": 1990, "titre": "le président", "nom": "Collor" }
+      ],
+      "evenements": {
+        "1982": "Premières élections directes des gouverneurs depuis 1965.",
+        "1983": "Crise de la dette et accord avec le FMI.",
+        "1984": "Campagne « Diretas Já » pour l’élection directe du président.",
+        "1985": "Tancredo Neves meurt avant d’entrer en fonctions ; José Sarney devient président.",
+        "1986": "Le plan Cruzado tente de briser l’inflation.",
+        "1987": "Le Brésil suspend le paiement des intérêts de sa dette.",
+        "1988": "Nouvelle Constitution ; assassinat du syndicaliste Chico Mendes.",
+        "1989": "Première élection présidentielle directe depuis 1960 : Fernando Collor l’emporte.",
+        "1990": "Le plan Collor gèle les comptes bancaires.",
+        "1991": "Création du Mercosur avec l’Argentine, l’Uruguay et le Paraguay.",
+        "1992": "Sommet de la Terre à Rio ; Collor est destitué pour corruption."
+      }
+    },
+    "13": {
+      "nom": "Chili", "adjectif": "chilien", "capitale": "Santiago",
+      "oppositionGauche": "le FPMR", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Pinochet" },
+        { "depuis": 1990, "titre": "le président", "nom": "Aylwin" }
+      ],
+      "evenements": {
+        "1982": "Crise financière : faillites bancaires et dévaluation du peso.",
+        "1983": "Premières journées nationales de protestation contre Pinochet.",
+        "1984": "État de siège face à la contestation.",
+        "1985": "Séisme de Valparaíso ; assassinat de trois militants communistes.",
+        "1986": "Le FPMR manque de peu un attentat contre Pinochet.",
+        "1987": "Visite du pape Jean-Paul II.",
+        "1988": "Référendum : le « non » à Pinochet l’emporte.",
+        "1989": "Patricio Aylwin est élu président.",
+        "1990": "Retour de la démocratie ; une commission enquête sur les crimes de la dictature.",
+        "1991": "Publication du rapport Rettig ; assassinat du sénateur Jaime Guzmán.",
+        "1992": "Premières élections municipales démocratiques depuis 1973."
+      }
+    },
+    "14": {
+      "nom": "Canada", "adjectif": "canadien", "capitale": "Ottawa",
+      "oppositionGauche": "les indépendantistes québécois", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Trudeau" },
+        { "depuis": 1984, "titre": "le Premier ministre", "nom": "Turner" },
+        { "depuis": 1985, "titre": "le Premier ministre", "nom": "Mulroney" }
+      ],
+      "evenements": {
+        "1982": "Rapatriement de la Constitution et Charte canadienne des droits et libertés.",
+        "1983": "Ottawa autorise les essais de missiles de croisière américains.",
+        "1984": "Brian Mulroney remporte une victoire écrasante.",
+        "1985": "Attentat contre le vol 182 d’Air India, parti du Canada.",
+        "1986": "Exposition universelle de Vancouver.",
+        "1987": "Accord du lac Meech sur la place du Québec.",
+        "1988": "Libre-échange avec les États-Unis ; Jeux olympiques d’hiver de Calgary.",
+        "1989": "Tuerie de l’École polytechnique de Montréal.",
+        "1990": "Échec de l’accord du lac Meech ; crise d’Oka.",
+        "1991": "Entrée en vigueur de la TPS ; participation à la guerre du Golfe.",
+        "1992": "L’accord de Charlottetown est rejeté par référendum."
+      }
+    },
+    "15": {
+      "nom": "Grèce", "adjectif": "grec", "capitale": "Athènes",
+      "oppositionGauche": "le groupe « 17-Novembre »", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Papandréou" },
+        { "depuis": 1990, "titre": "le Premier ministre", "nom": "Mitsotákis" }
+      ],
+      "evenements": {
+        "1982": "Andréas Papandréou fait reconnaître officiellement la résistance de gauche.",
+        "1983": "Accord sur le maintien des bases américaines ; le 17-Novembre tue un officier américain.",
+        "1984": "Le PASOK arrive en tête des élections européennes.",
+        "1985": "Papandréou est réélu puis impose un plan d’austérité.",
+        "1986": "Une révision constitutionnelle réduit les pouvoirs du président.",
+        "1987": "Crise avec la Turquie en mer Égée.",
+        "1988": "Scandale Koskotas ; attentat contre le navire City of Poros.",
+        "1989": "Papandréou perd les élections ; coalition entre la droite et les communistes.",
+        "1990": "Konstantínos Mitsotákis devient Premier ministre.",
+        "1991": "Athènes s’oppose à la reconnaissance de la Macédoine indépendante.",
+        "1992": "Manifestations massives à Thessalonique contre le nom « Macédoine »."
+      }
+    },
+    "16": {
+      "nom": "Suède", "adjectif": "suédois", "capitale": "Stockholm",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Fälldin" },
+        { "depuis": 1983, "titre": "le Premier ministre", "nom": "Palme" },
+        { "depuis": 1986, "titre": "le Premier ministre", "nom": "Carlsson" },
+        { "depuis": 1992, "titre": "le Premier ministre", "nom": "Bildt" }
+      ],
+      "evenements": {
+        "1982": "Olof Palme revient au pouvoir et dévalue la couronne.",
+        "1983": "Grande manifestation patronale contre les fonds salariaux.",
+        "1984": "Les fonds salariaux des travailleurs entrent en vigueur.",
+        "1985": "Olof Palme est réélu.",
+        "1986": "Olof Palme est assassiné dans une rue de Stockholm.",
+        "1987": "Scandale Bofors des ventes d’armes à l’Inde.",
+        "1988": "Les Verts entrent au Parlement.",
+        "1989": "Christer Pettersson est condamné puis acquitté pour le meurtre de Palme.",
+        "1990": "Crise gouvernementale ; la Suède annonce vouloir rejoindre la CEE.",
+        "1991": "Crise bancaire ; Carl Bildt devient Premier ministre.",
+        "1992": "La banque centrale porte son taux à 500 % pour défendre la couronne."
+      }
+    },
+    "17": {
+      "nom": "Royaume-Uni", "adjectif": "britannique", "capitale": "Londres",
+      "oppositionGauche": "l’IRA", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Thatcher" },
+        { "depuis": 1991, "titre": "le Premier ministre", "nom": "Major" }
+      ],
+      "evenements": {
+        "1982": "Guerre des Malouines contre l’Argentine.",
+        "1983": "Réélection triomphale de Margaret Thatcher.",
+        "1984": "Grève des mineurs ; l’IRA fait sauter le Grand Hotel de Brighton.",
+        "1985": "Fin de la grève des mineurs ; accord anglo-irlandais.",
+        "1986": "« Big Bang » : dérégulation de la City.",
+        "1987": "Troisième victoire de Thatcher ; attentat de l’IRA à Enniskillen.",
+        "1988": "Un attentat détruit un Boeing de la Pan Am au-dessus de Lockerbie.",
+        "1989": "Drame de Hillsborough : 96 supporters meurent.",
+        "1990": "Émeutes contre la poll tax ; Margaret Thatcher démissionne.",
+        "1991": "Guerre du Golfe ; l’IRA tire au mortier sur Downing Street.",
+        "1992": "Réélection de John Major ; la livre sort du système monétaire européen."
+      }
+    },
+    "18": {
+      "nom": "France", "adjectif": "français", "capitale": "Paris",
+      "oppositionGauche": "le groupe Action directe", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Mitterrand" }
+      ],
+      "evenements": {
+        "1982": "Nationalisations et lois de décentralisation.",
+        "1983": "Le gouvernement prend le « tournant de la rigueur ».",
+        "1984": "Manifestations pour l’école libre ; Laurent Fabius devient Premier ministre.",
+        "1985": "Affaire du Rainbow Warrior, coulé par les services secrets.",
+        "1986": "Première cohabitation avec Jacques Chirac ; vague d’attentats à Paris.",
+        "1987": "Procès de Klaus Barbie ; arrestation des chefs d’Action directe.",
+        "1988": "Mitterrand est réélu ; accords de Matignon sur la Nouvelle-Calédonie.",
+        "1989": "Célébrations du bicentenaire de la Révolution.",
+        "1990": "Création de la contribution sociale généralisée.",
+        "1991": "Édith Cresson, première femme Première ministre ; guerre du Golfe.",
+        "1992": "Le traité de Maastricht est approuvé de justesse par référendum."
+      }
+    },
+    "19": {
+      "nom": "Espagne", "adjectif": "espagnol", "capitale": "Madrid",
+      "oppositionGauche": "l’ETA", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président du gouvernement", "nom": "Calvo-Sotelo" },
+        { "depuis": 1983, "titre": "le président du gouvernement", "nom": "González" }
+      ],
+      "evenements": {
+        "1982": "Victoire socialiste de Felipe González ; l’Espagne accueille la Coupe du monde.",
+        "1983": "Expropriation du groupe Rumasa.",
+        "1984": "Plan de reconversion de la sidérurgie et des chantiers navals.",
+        "1985": "Signature du traité d’adhésion à la CEE.",
+        "1986": "Entrée dans la CEE ; référendum sur le maintien dans l’OTAN.",
+        "1987": "Attentat de l’ETA contre le supermarché Hipercor de Barcelone.",
+        "1988": "Grève générale contre la politique économique du gouvernement.",
+        "1989": "Présidence espagnole de la CEE ; González est réélu.",
+        "1990": "Scandale Juan Guerra, frère du vice-président du gouvernement.",
+        "1991": "Madrid accueille la conférence de paix sur le Proche-Orient.",
+        "1992": "Jeux olympiques de Barcelone et Exposition universelle de Séville."
+      }
+    },
+    "20": {
+      "nom": "RFA", "adjectif": "ouest-allemand", "capitale": "Bonn",
+      "oppositionGauche": "la Fraction armée rouge", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le chancelier", "nom": "Schmidt" },
+        { "depuis": 1983, "titre": "le chancelier", "nom": "Kohl" }
+      ],
+      "evenements": {
+        "1982": "Helmut Kohl devient chancelier après une motion de censure.",
+        "1983": "Les Verts entrent au Bundestag ; déploiement des Pershing II.",
+        "1984": "Affaire Flick du financement des partis.",
+        "1985": "Visite controversée de Reagan au cimetière militaire de Bitburg.",
+        "1986": "Attentat contre la discothèque La Belle à Berlin-Ouest.",
+        "1987": "Erich Honecker est reçu en visite officielle à Bonn.",
+        "1988": "Catastrophe du meeting aérien de Ramstein.",
+        "1989": "Chute du mur de Berlin.",
+        "1990": "Réunification allemande le 3 octobre.",
+        "1991": "Le Bundestag choisit Berlin comme capitale.",
+        "1992": "Incendie criminel xénophobe à Mölln."
+      }
+    },
+    "21": {
+      "nom": "Roumanie", "adjectif": "roumain", "capitale": "Bucarest",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "les contre-révolutionnaires",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Ceaușescu" },
+        { "depuis": 1990, "titre": "le président", "nom": "Iliescu" }
+      ],
+      "evenements": {
+        "1982": "Ceaușescu impose le remboursement accéléré de la dette extérieure.",
+        "1983": "Le rationnement alimentaire s’étend à tout le pays.",
+        "1984": "La Roumanie participe aux Jeux de Los Angeles malgré le boycott soviétique.",
+        "1985": "Coupures de chauffage et d’électricité en plein hiver.",
+        "1986": "Le centre de Bucarest est rasé pour bâtir la Maison du peuple.",
+        "1987": "Révolte ouvrière de Brașov.",
+        "1988": "Plan de « systématisation » des villages.",
+        "1989": "Révolution : Ceaușescu est renversé et exécuté.",
+        "1990": "Ion Iliescu est élu ; les mineurs matent l’opposition à Bucarest.",
+        "1991": "Adoption d’une nouvelle Constitution.",
+        "1992": "Ion Iliescu est réélu."
+      }
+    },
+    "22": {
+      "nom": "Italie", "adjectif": "italien", "capitale": "Rome",
+      "oppositionGauche": "les Brigades rouges", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président du Conseil", "nom": "Spadolini" },
+        { "depuis": 1983, "titre": "le président du Conseil", "nom": "Fanfani" },
+        { "depuis": 1984, "titre": "le président du Conseil", "nom": "Craxi" },
+        { "depuis": 1987, "titre": "le président du Conseil", "nom": "Fanfani" },
+        { "depuis": 1988, "titre": "le président du Conseil", "nom": "De Mita" },
+        { "depuis": 1990, "titre": "le président du Conseil", "nom": "Andreotti" },
+        { "depuis": 1992, "titre": "le président du Conseil", "nom": "Amato" }
+      ],
+      "evenements": {
+        "1982": "L’Italie gagne la Coupe du monde ; la Mafia assassine le général dalla Chiesa.",
+        "1983": "Bettino Craxi, premier socialiste à la présidence du Conseil.",
+        "1984": "Nouveau concordat avec le Vatican.",
+        "1985": "Détournement du paquebot Achille Lauro.",
+        "1986": "Ouverture du maxi-procès de la Mafia à Palerme.",
+        "1987": "Le maxi-procès s’achève sur des centaines de condamnations.",
+        "1988": "Les Brigades rouges assassinent le sénateur Roberto Ruffilli.",
+        "1989": "Giulio Andreotti revient à la tête du gouvernement.",
+        "1990": "Coupe du monde de football ; révélation du réseau Gladio.",
+        "1991": "Le Parti communiste devient le Parti démocrate de la gauche.",
+        "1992": "Opération « Mains propres » ; assassinat des juges Falcone et Borsellino."
+      }
+    },
+    "23": {
+      "nom": "RDA", "adjectif": "est-allemand", "capitale": "Berlin-Est",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le chef du Parti", "nom": "Honecker" },
+        { "depuis": 1990, "titre": "le Premier ministre", "nom": "de Maizière" },
+        { "depuis": 1991, "titre": "le chancelier", "nom": "Kohl" }
+      ],
+      "evenements": {
+        "1982": "Un mouvement pacifiste naît autour des églises protestantes.",
+        "1983": "La RFA accorde à la RDA un crédit d’un milliard de marks.",
+        "1984": "Des dizaines de milliers d’Allemands de l’Est sont autorisés à partir à l’Ouest.",
+        "1985": "Honecker et Kohl se rencontrent aux obsèques de Tchernenko à Moscou.",
+        "1986": "Accord culturel avec la RFA et premiers jumelages de villes.",
+        "1987": "Visite officielle d’Erich Honecker en RFA.",
+        "1988": "Le régime interdit la revue soviétique Spoutnik, trop réformatrice.",
+        "1989": "Exode vers l’Ouest, manifestations de Leipzig et chute du Mur.",
+        "1990": "Premières élections libres, union monétaire puis réunification.",
+        "1991": "Chômage de masse à l’Est ; assassinat du président de la Treuhand.",
+        "1992": "Émeutes xénophobes de Rostock-Lichtenhagen."
+      }
+    },
+    "24": {
+      "nom": "Pologne", "adjectif": "polonais", "capitale": "Varsovie",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "Solidarność",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Jaruzelski" },
+        { "depuis": 1991, "titre": "le président", "nom": "Wałęsa" }
+      ],
+      "evenements": {
+        "1982": "Loi martiale : Solidarność est dissous, Lech Wałęsa libéré en novembre.",
+        "1983": "Levée de la loi martiale ; Lech Wałęsa reçoit le prix Nobel de la paix.",
+        "1984": "Le père Jerzy Popiełuszko est assassiné par la police politique.",
+        "1985": "Jaruzelski quitte la tête du gouvernement pour celle de l’État.",
+        "1986": "Amnistie des prisonniers politiques.",
+        "1987": "Le pouvoir perd son référendum sur les réformes.",
+        "1988": "Vague de grèves ouvrières.",
+        "1989": "Table ronde et élections semi-libres : Tadeusz Mazowiecki devient Premier ministre.",
+        "1990": "Plan Balcerowicz ; Lech Wałęsa est élu président.",
+        "1991": "Premières élections législatives entièrement libres.",
+        "1992": "Hanna Suchocka devient la première femme Première ministre."
+      }
+    },
+    "25": {
+      "nom": "Tchécoslovaquie", "adjectif": "tchécoslovaque", "capitale": "Prague",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le secrétaire général", "nom": "Husák" },
+        { "depuis": 1988, "titre": "le secrétaire général", "nom": "Jakeš" },
+        { "depuis": 1990, "titre": "le président", "nom": "Havel" }
+      ],
+      "evenements": {
+        "1982": "Les signataires de la Charte 77 restent harcelés par la police.",
+        "1983": "Des missiles soviétiques sont déployés en réponse aux euromissiles.",
+        "1984": "Le poète Jaroslav Seifert reçoit le prix Nobel de littérature.",
+        "1985": "Grand pèlerinage catholique de Velehrad.",
+        "1986": "Procès des dirigeants de la Section jazz.",
+        "1987": "Miloš Jakeš remplace Gustáv Husák à la tête du Parti.",
+        "1988": "« Manifestation des bougies » à Bratislava.",
+        "1989": "Révolution de velours : Václav Havel devient président.",
+        "1990": "Premières élections libres depuis 1946.",
+        "1991": "Départ des dernières troupes soviétiques.",
+        "1992": "Tchèques et Slovaques s’accordent sur la partition du pays."
+      }
+    },
+    "26": {
+      "nom": "Yougoslavie", "adjectif": "yougoslave", "capitale": "Belgrade",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "les Albanais du Kosovo",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Stambolić" },
+        { "depuis": 1983, "titre": "le président", "nom": "Špiljak" },
+        { "depuis": 1984, "titre": "le président", "nom": "Đuranović" },
+        { "depuis": 1985, "titre": "le président", "nom": "Vlajković" },
+        { "depuis": 1986, "titre": "le président", "nom": "Hasani" },
+        { "depuis": 1987, "titre": "le président", "nom": "Mojsov" },
+        { "depuis": 1988, "titre": "le président", "nom": "Dizdarević" },
+        { "depuis": 1989, "titre": "le président", "nom": "Drnovšek" },
+        { "depuis": 1990, "titre": "le président", "nom": "Jović" },
+        { "depuis": 1991, "titre": "le président", "nom": "Mesić" },
+        { "depuis": 1992, "titre": "le président", "nom": "Ćosić" }
+      ],
+      "evenements": {
+        "1982": "Crise de la dette et plan de stabilisation.",
+        "1983": "Austérité : l’essence est rationnée.",
+        "1984": "Sarajevo accueille les Jeux olympiques d’hiver.",
+        "1985": "L’inflation s’emballe.",
+        "1986": "Le mémorandum de l’Académie serbe des sciences attise le nationalisme.",
+        "1987": "Slobodan Milošević prend le contrôle du parti serbe.",
+        "1988": "« Révolution antibureaucratique » en Voïvodine et au Monténégro.",
+        "1989": "Milošević supprime l’autonomie du Kosovo.",
+        "1990": "La Ligue des communistes éclate ; élections libres dans les républiques.",
+        "1991": "Indépendance de la Slovénie et de la Croatie ; siège de Vukovar.",
+        "1992": "Guerre en Bosnie et siège de Sarajevo ; sanctions de l’ONU."
+      }
+    },
+    "27": {
+      "nom": "Afrique du Sud", "adjectif": "sud-africain", "capitale": "Pretoria",
+      "oppositionGauche": "l’ANC", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Botha" },
+        { "depuis": 1985, "titre": "le président", "nom": "Botha" },
+        { "depuis": 1990, "titre": "le président", "nom": "de Klerk" }
+      ],
+      "evenements": {
+        "1982": "Raid sud-africain contre l’ANC à Maseru, au Lesotho.",
+        "1983": "Fondation du Front démocratique uni contre l’apartheid.",
+        "1984": "Nouvelle Constitution tricamérale ; Desmond Tutu reçoit le prix Nobel de la paix.",
+        "1985": "État d’urgence ; les banques étrangères retirent leurs crédits.",
+        "1986": "État d’urgence national ; le Congrès américain vote des sanctions.",
+        "1987": "Grève historique des mineurs noirs.",
+        "1988": "Accords de New York : l’Afrique du Sud accepte l’indépendance de la Namibie.",
+        "1989": "Frederik de Klerk remplace P. W. Botha.",
+        "1990": "Libération de Nelson Mandela ; l’ANC est légalisé.",
+        "1991": "Abolition des dernières grandes lois de l’apartheid.",
+        "1992": "Les Blancs approuvent les négociations par référendum ; massacre de Boipatong."
+      }
+    },
+    "28": {
+      "nom": "Égypte", "adjectif": "égyptien", "capitale": "le Caire",
+      "oppositionGauche": "les intégristes musulmans", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Moubarak" }
+      ],
+      "evenements": {
+        "1982": "Israël restitue le Sinaï.",
+        "1983": "Hosni Moubarak reçoit Yasser Arafat au Caire.",
+        "1984": "Rétablissement des relations diplomatiques avec l’URSS.",
+        "1985": "Détournement de l’Achille Lauro ; un avion d’EgyptAir est détourné vers Malte.",
+        "1986": "Mutinerie des conscrits de la police anti-émeute.",
+        "1987": "Hosni Moubarak est reconduit pour un deuxième mandat.",
+        "1988": "Naguib Mahfouz reçoit le prix Nobel de littérature.",
+        "1989": "L’Égypte réintègre la Ligue arabe.",
+        "1990": "Assassinat du président de l’Assemblée, Rifaat el-Mahgoub.",
+        "1991": "L’Égypte rejoint la coalition contre l’Irak ; une grande partie de sa dette est effacée.",
+        "1992": "Séisme au Caire ; montée des violences islamistes."
+      }
+    },
+    "29": {
+      "nom": "Tunisie", "adjectif": "tunisien", "capitale": "Tunis",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Bourguiba" },
+        { "depuis": 1988, "titre": "le président", "nom": "Ben Ali" }
+      ],
+      "evenements": {
+        "1982": "L’OLP chassée de Beyrouth installe son siège à Tunis.",
+        "1983": "Légalisation des premiers partis d’opposition.",
+        "1984": "Émeutes du pain réprimées dans le sang.",
+        "1985": "L’aviation israélienne bombarde le siège de l’OLP à Hammam Chott.",
+        "1986": "Bourguiba limoge son Premier ministre, Mohamed Mzali.",
+        "1987": "Zine el-Abidine Ben Ali dépose Habib Bourguiba.",
+        "1988": "Abolition de la présidence à vie ; pacte national.",
+        "1989": "Ben Ali est élu président ; naissance de l’Union du Maghreb arabe.",
+        "1990": "La Ligue arabe quitte Tunis pour revenir au Caire.",
+        "1991": "Le mouvement islamiste Ennahdha est démantelé.",
+        "1992": "Procès de masse contre les dirigeants d’Ennahdha."
+      }
+    },
+    "30": {
+      "nom": "Maroc", "adjectif": "marocain", "capitale": "Rabat",
+      "oppositionGauche": "le Polisario", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le roi", "nom": "Hassan II" }
+      ],
+      "evenements": {
+        "1982": "L’armée poursuit la construction du mur de sable au Sahara occidental.",
+        "1983": "Plan d’ajustement structurel négocié avec le FMI.",
+        "1984": "Émeutes du pain ; le Maroc quitte l’OUA, qui a admis la RASD.",
+        "1985": "Visite du pape Jean-Paul II à Casablanca.",
+        "1986": "Hassan II reçoit Shimon Peres à Ifrane.",
+        "1987": "La CEE rejette la candidature du Maroc.",
+        "1988": "Reprise des relations avec l’Algérie ; plan de paix de l’ONU pour le Sahara.",
+        "1989": "Fondation de l’Union du Maghreb arabe à Marrakech.",
+        "1990": "Émeutes à Fès après une grève générale.",
+        "1991": "Cessez-le-feu au Sahara occidental sous l’égide de l’ONU.",
+        "1992": "Révision constitutionnelle approuvée par référendum."
+      }
+    },
+    "31": {
+      "nom": "Algérie", "adjectif": "algérien", "capitale": "Alger",
+      "oppositionGauche": "les autonomistes kabyles", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Chadli" },
+        { "depuis": 1992, "titre": "le président du Haut Comité d’État", "nom": "Boudiaf" }
+      ],
+      "evenements": {
+        "1982": "Affrontements entre étudiants islamistes et de gauche à Alger.",
+        "1983": "Première visite d’État de Chadli en France.",
+        "1984": "Chadli Bendjedid est réélu.",
+        "1985": "Le maquis islamiste de Mustapha Bouyali frappe dans l’Algérois.",
+        "1986": "Effondrement du pétrole ; émeutes à Constantine.",
+        "1987": "Mustapha Bouyali est tué par les forces de sécurité.",
+        "1988": "Les émeutes d’octobre sont réprimées ; le régime promet des réformes.",
+        "1989": "Nouvelle Constitution pluraliste ; le FIS est légalisé.",
+        "1990": "Le FIS remporte les élections locales.",
+        "1991": "Le FIS arrive largement en tête du premier tour des législatives.",
+        "1992": "L’armée interrompt les élections ; Mohamed Boudiaf est assassiné."
+      }
+    },
+    "32": {
+      "nom": "Libye", "adjectif": "libyen", "capitale": "Tripoli",
+      "oppositionGauche": "Al-Bourkan", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le colonel", "nom": "Kadhafi" }
+      ],
+      "evenements": {
+        "1982": "Les États-Unis décrètent un embargo sur le pétrole libyen.",
+        "1983": "Les troupes libyennes appuient les rebelles du nord du Tchad.",
+        "1984": "Fusillade devant l’ambassade libyenne à Londres : une policière est tuée.",
+        "1985": "Tripoli expulse des dizaines de milliers de travailleurs tunisiens et égyptiens.",
+        "1986": "L’aviation américaine bombarde Tripoli et Benghazi.",
+        "1987": "Défaite au Tchad lors de la « guerre des Toyota ».",
+        "1988": "L’attentat de Lockerbie est attribué aux services libyens.",
+        "1989": "Attentat contre le DC-10 d’UTA au-dessus du Niger.",
+        "1990": "Le différend sur la bande d’Aozou est confié à la Cour internationale de justice.",
+        "1991": "Deux agents libyens sont inculpés pour l’attentat de Lockerbie.",
+        "1992": "L’ONU impose des sanctions pour obtenir leur extradition."
+      }
+    },
+    "33": {
+      "nom": "Mali", "adjectif": "malien", "capitale": "Bamako",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Traoré" },
+        { "depuis": 1991, "titre": "le lieutenant-colonel", "nom": "Touré" },
+        { "depuis": 1992, "titre": "le président", "nom": "Konaré" }
+      ],
+      "evenements": {
+        "1982": "La sécheresse s’abat de nouveau sur le Sahel.",
+        "1983": "La famine menace le nord du pays.",
+        "1984": "Le Mali réintègre la zone franc.",
+        "1985": "Guerre de la bande d’Agacher avec le Burkina Faso.",
+        "1986": "La Cour internationale de justice partage la bande d’Agacher.",
+        "1987": "Invasion de criquets pèlerins au Sahel.",
+        "1988": "Moussa Traoré prend la présidence de l’OUA.",
+        "1989": "Le pays applique un programme d’ajustement avec le FMI.",
+        "1990": "Début de la rébellion touarègue dans le nord.",
+        "1991": "Révolution de mars : Moussa Traoré est renversé.",
+        "1992": "Alpha Oumar Konaré est élu ; pacte national avec les Touaregs."
+      }
+    },
+    "34": {
+      "nom": "Nigeria", "adjectif": "nigérian", "capitale": "Lagos",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Shagari" },
+        { "depuis": 1984, "titre": "le général", "nom": "Buhari" },
+        { "depuis": 1986, "titre": "le général", "nom": "Babangida" }
+      ],
+      "evenements": {
+        "1982": "Émeutes religieuses de la secte Maitatsine dans le nord.",
+        "1983": "Expulsion de plus d’un million d’immigrés ; coup d’État du général Buhari.",
+        "1984": "Buhari lance sa « guerre contre l’indiscipline ».",
+        "1985": "Le général Babangida renverse Buhari.",
+        "1986": "Wole Soyinka reçoit le prix Nobel de littérature ; plan d’ajustement structurel.",
+        "1987": "Babangida annonce un calendrier de retour au pouvoir civil.",
+        "1988": "Une assemblée constituante prépare la future Constitution.",
+        "1989": "Le régime crée deux partis officiels, seuls autorisés.",
+        "1990": "Tentative de coup d’État du major Gideon Orkar.",
+        "1991": "Abuja devient la capitale fédérale.",
+        "1992": "Élections législatives entre les deux partis officiels."
+      }
+    },
+    "35": {
+      "nom": "Soudan", "adjectif": "soudanais", "capitale": "Khartoum",
+      "oppositionGauche": "l’Anya-Nya", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Nimeiry" },
+        { "depuis": 1985, "titre": "le général", "nom": "al-Dahab" },
+        { "depuis": 1986, "titre": "le Premier ministre", "nom": "al-Mahdi" },
+        { "depuis": 1989, "titre": "le général", "nom": "el-Béchir" }
+      ],
+      "evenements": {
+        "1982": "Charte d’intégration avec l’Égypte.",
+        "1983": "Nimeiry impose la charia ; John Garang fonde le SPLA dans le Sud.",
+        "1984": "La famine frappe le Darfour et le Kordofan.",
+        "1985": "Nimeiry est renversé pendant un voyage aux États-Unis.",
+        "1986": "Élections libres : Sadiq al-Mahdi devient Premier ministre.",
+        "1987": "Massacre de déplacés dinkas à Ed Daein.",
+        "1988": "Inondations catastrophiques à Khartoum ; famine au Bahr el-Ghazal.",
+        "1989": "Coup d’État islamiste du général Omar el-Béchir.",
+        "1990": "Khartoum soutient l’Irak dans la crise du Golfe.",
+        "1991": "Le SPLA se divise.",
+        "1992": "Grande offensive gouvernementale dans le Sud."
+      }
+    },
+    "36": {
+      "nom": "Éthiopie", "adjectif": "éthiopien", "capitale": "Addis-Abeba",
+      "oppositionGauche": "le Front de libération de l’Érythrée", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le colonel", "nom": "Mengistu" },
+        { "depuis": 1991, "titre": "le président", "nom": "Meles Zenawi" }
+      ],
+      "evenements": {
+        "1982": "Offensive « Étoile rouge » contre les rebelles érythréens.",
+        "1983": "La sécheresse annonce la famine dans le nord.",
+        "1984": "Grande famine ; fondation du Parti des travailleurs.",
+        "1985": "Concert Live Aid ; réinstallations forcées de paysans.",
+        "1986": "Regroupement forcé des paysans dans de nouveaux villages.",
+        "1987": "Proclamation de la République populaire ; Mengistu en devient président.",
+        "1988": "Défaite de l’armée face aux Érythréens à Afabet.",
+        "1989": "Coup d’État manqué contre Mengistu.",
+        "1990": "Les rebelles érythréens prennent le port de Massaoua.",
+        "1991": "Mengistu s’enfuit ; les rebelles entrent dans Addis-Abeba.",
+        "1992": "Élections régionales boycottées par le Front de libération oromo."
+      }
+    },
+    "37": {
+      "nom": "Kenya", "adjectif": "kényan", "capitale": "Nairobi",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Moi" }
+      ],
+      "evenements": {
+        "1982": "Coup d’État manqué de l’armée de l’air ; le parti unique est inscrit dans la Constitution.",
+        "1983": "Élections anticipées convoquées par Daniel arap Moi.",
+        "1984": "Massacre de Wagalla dans le nord-est.",
+        "1985": "Nairobi accueille la conférence mondiale des Nations unies sur les femmes.",
+        "1986": "Répression du mouvement clandestin Mwakenya.",
+        "1987": "Nairobi accueille les Jeux africains.",
+        "1988": "Élections au « vote en file indienne ».",
+        "1989": "Richard Leakey fait brûler douze tonnes d’ivoire saisi.",
+        "1990": "Assassinat du ministre Robert Ouko ; émeutes de Saba Saba.",
+        "1991": "Retour du multipartisme sous la pression des bailleurs.",
+        "1992": "Premières élections multipartites : Moi est réélu."
+      }
+    },
+    "38": {
+      "nom": "Zaïre", "adjectif": "zaïrois", "capitale": "Kinshasa",
+      "oppositionGauche": "le FLNC", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Mobutu" }
+      ],
+      "evenements": {
+        "1982": "Des parlementaires fondent l’UDPS, premier parti d’opposition.",
+        "1983": "Forte dévaluation du zaïre sous l’égide du FMI.",
+        "1984": "Mobutu est réélu, seul candidat.",
+        "1985": "Une incursion rebelle s’empare brièvement de Moba, au bord du lac Tanganyika.",
+        "1986": "La base de Kamina sert de relais à l’aide américaine à l’UNITA.",
+        "1987": "Nouveau plan d’ajustement du FMI.",
+        "1988": "Brouille avec la Belgique au sujet de la dette.",
+        "1989": "Rupture provisoire de la coopération avec la Belgique.",
+        "1990": "Mobutu annonce le multipartisme ; massacre sur le campus de Lubumbashi.",
+        "1991": "Pillages de Kinshasa par l’armée ; ouverture de la Conférence nationale.",
+        "1992": "La Conférence nationale souveraine élit Étienne Tshisekedi Premier ministre."
+      }
+    },
+    "39": {
+      "nom": "Tanzanie", "adjectif": "tanzanien", "capitale": "Dar es Salaam",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Nyerere" },
+        { "depuis": 1986, "titre": "le président", "nom": "Mwinyi" }
+      ],
+      "evenements": {
+        "1982": "Détournement d’un avion d’Air Tanzania jusqu’à Londres.",
+        "1983": "Campagne contre les « saboteurs économiques ».",
+        "1984": "Le Premier ministre Edward Sokoine meurt dans un accident de voiture.",
+        "1985": "Julius Nyerere se retire ; Ali Hassan Mwinyi lui succède.",
+        "1986": "Accord avec le FMI et libéralisation de l’économie.",
+        "1987": "Les soldats tanzaniens combattent la RENAMO au Mozambique.",
+        "1988": "Retrait des troupes tanzaniennes du Mozambique.",
+        "1989": "La Tanzanie obtient l’interdiction mondiale du commerce de l’ivoire.",
+        "1990": "Nyerere quitte la présidence du parti unique.",
+        "1991": "Une commission consulte le pays sur le multipartisme.",
+        "1992": "Retour du multipartisme."
+      }
+    },
+    "40": {
+      "nom": "Mozambique", "adjectif": "mozambicain", "capitale": "Maputo",
+      "oppositionGauche": "les Makondés", "oppositionDroite": "la RENAMO",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Machel" },
+        { "depuis": 1987, "titre": "le président", "nom": "Chissano" }
+      ],
+      "evenements": {
+        "1982": "La RENAMO, soutenue par l’Afrique du Sud, étend la guerre.",
+        "1983": "« Opération Production » : des citadins sans emploi sont déportés en province.",
+        "1984": "Accord de Nkomati avec l’Afrique du Sud.",
+        "1985": "L’armée prend la base de la RENAMO à Gorongosa.",
+        "1986": "Samora Machel meurt dans l’accident de son avion.",
+        "1987": "Massacre de Homoíne attribué à la RENAMO.",
+        "1988": "Le rapport Gersony documente les atrocités de la RENAMO.",
+        "1989": "Le Frelimo abandonne le marxisme-léninisme.",
+        "1990": "Nouvelle Constitution multipartite.",
+        "1991": "Négociations de paix à Rome avec la RENAMO.",
+        "1992": "Accords de paix de Rome."
+      }
+    },
+    "41": {
+      "nom": "Zambie", "adjectif": "zambien", "capitale": "Lusaka",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Kaunda" },
+        { "depuis": 1992, "titre": "le président", "nom": "Chiluba" }
+      ],
+      "evenements": {
+        "1982": "Kaunda rencontre P. W. Botha à la frontière du Botswana.",
+        "1983": "Kenneth Kaunda est réélu.",
+        "1984": "Accords de Lusaka entre l’Angola et l’Afrique du Sud.",
+        "1985": "Des hommes d’affaires sud-africains rencontrent l’ANC en Zambie.",
+        "1986": "Raid sud-africain contre l’ANC à Lusaka ; émeutes de la faim au Copperbelt.",
+        "1987": "Kaunda rompt avec le FMI.",
+        "1988": "Kenneth Kaunda est réélu, seul candidat.",
+        "1989": "Kaunda reçoit Frederik de Klerk à Livingstone.",
+        "1990": "Émeutes du maïs et coup d’État manqué ; Kaunda accepte le multipartisme.",
+        "1991": "Frederick Chiluba bat Kaunda à la présidentielle.",
+        "1992": "Une grave sécheresse frappe le pays."
+      }
+    },
+    "42": {
+      "nom": "Angola", "adjectif": "angolais", "capitale": "Luanda",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’UNITA",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "dos Santos" }
+      ],
+      "evenements": {
+        "1982": "Raids sud-africains dans le sud du pays.",
+        "1983": "L’UNITA s’empare de Cangamba.",
+        "1984": "Accord de Lusaka avec l’Afrique du Sud.",
+        "1985": "Un commando sud-africain est capturé à Cabinda.",
+        "1986": "Jonas Savimbi est reçu à la Maison-Blanche ; Washington arme l’UNITA.",
+        "1987": "Début de la bataille de Cuito Cuanavale.",
+        "1988": "Accords de New York : Cubains et Sud-Africains quitteront le pays.",
+        "1989": "Poignée de main entre dos Santos et Savimbi à Gbadolite, sans lendemain.",
+        "1990": "Le MPLA renonce au marxisme-léninisme.",
+        "1991": "Accords de paix de Bicesse avec l’UNITA.",
+        "1992": "Élections contestées par l’UNITA ; la guerre reprend."
+      }
+    },
+    "43": {
+      "nom": "Japon", "adjectif": "japonais", "capitale": "Tokyo",
+      "oppositionGauche": "l’Armée rouge japonaise", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Suzuki" },
+        { "depuis": 1983, "titre": "le Premier ministre", "nom": "Nakasone" },
+        { "depuis": 1988, "titre": "le Premier ministre", "nom": "Takeshita" },
+        { "depuis": 1989, "titre": "le Premier ministre", "nom": "Uno" },
+        { "depuis": 1990, "titre": "le Premier ministre", "nom": "Kaifu" },
+        { "depuis": 1992, "titre": "le Premier ministre", "nom": "Miyazawa" }
+      ],
+      "evenements": {
+        "1982": "Yasuhiro Nakasone devient Premier ministre.",
+        "1983": "Nakasone promet de faire du Japon un « porte-avions insubmersible ».",
+        "1984": "Affaire Glico-Morinaga : un mystérieux maître chanteur empoisonne des confiseries.",
+        "1985": "Accident du vol 123 de Japan Airlines ; accords du Plaza sur le yen.",
+        "1986": "Tokyo accueille le sommet du G7.",
+        "1987": "Privatisation des chemins de fer nationaux.",
+        "1988": "Scandale Recruit de corruption politique.",
+        "1989": "Mort de l’empereur Hirohito ; la Bourse de Tokyo au sommet.",
+        "1990": "Krach de la Bourse de Tokyo.",
+        "1991": "Le Japon finance la guerre du Golfe sans y envoyer de troupes.",
+        "1992": "Une loi autorise l’envoi de soldats japonais dans les missions de l’ONU."
+      }
+    },
+    "44": {
+      "nom": "Corée du Nord", "adjectif": "nord-coréen", "capitale": "Pyongyang",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Kim Il-sung" }
+      ],
+      "evenements": {
+        "1982": "Pyongyang inaugure la tour du Juche pour les 70 ans de Kim Il-sung.",
+        "1983": "Attentat de Rangoun contre le président sud-coréen.",
+        "1984": "Le Nord envoie de l’aide aux sinistrés des inondations au Sud.",
+        "1985": "Adhésion au traité de non-prolifération ; premières réunions de familles séparées.",
+        "1986": "Mise en service du réacteur nucléaire de Yongbyon.",
+        "1987": "Des agents nord-coréens font exploser le vol 858 de Korean Air.",
+        "1988": "Boycott des Jeux olympiques de Séoul.",
+        "1989": "Pyongyang accueille le Festival mondial de la jeunesse.",
+        "1990": "Premières rencontres entre les Premiers ministres du Nord et du Sud.",
+        "1991": "Les deux Corées entrent ensemble à l’ONU.",
+        "1992": "Premières inspections de l’AIEA."
+      }
+    },
+    "45": {
+      "nom": "Corée du Sud", "adjectif": "sud-coréen", "capitale": "Séoul",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Chun Doo-hwan" },
+        { "depuis": 1988, "titre": "le président", "nom": "Roh Tae-woo" }
+      ],
+      "evenements": {
+        "1982": "Levée du couvre-feu nocturne en vigueur depuis la guerre.",
+        "1983": "Attentat de Rangoun ; le Boeing de la KAL est abattu par les Soviétiques.",
+        "1984": "Visite du pape Jean-Paul II.",
+        "1985": "Percée de l’opposition aux législatives.",
+        "1986": "Séoul accueille les Jeux asiatiques.",
+        "1987": "Soulèvement démocratique de juin : le régime cède l’élection directe du président.",
+        "1988": "Jeux olympiques de Séoul.",
+        "1989": "Séoul établit des relations avec la Hongrie, premier pays communiste.",
+        "1990": "Relations diplomatiques avec l’URSS.",
+        "1991": "Entrée à l’ONU.",
+        "1992": "Relations avec la Chine ; Kim Young-sam est élu président."
+      }
+    },
+    "46": {
+      "nom": "Australie", "adjectif": "australien", "capitale": "Canberra",
+      "oppositionGauche": "le Front de libération aborigène", "oppositionDroite": "le Mouvement du koala noir",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Fraser" },
+        { "depuis": 1983, "titre": "le Premier ministre", "nom": "Hawke" },
+        { "depuis": 1992, "titre": "le Premier ministre", "nom": "Keating" }
+      ],
+      "evenements": {
+        "1982": "Brisbane accueille les Jeux du Commonwealth.",
+        "1983": "Bob Hawke devient Premier ministre ; Australia II remporte la Coupe de l’America.",
+        "1984": "Bob Hawke est réélu.",
+        "1985": "Uluru est rendu à ses propriétaires aborigènes.",
+        "1986": "L’Australia Act coupe les derniers liens juridiques avec Londres.",
+        "1987": "Troisième victoire de Bob Hawke.",
+        "1988": "Bicentenaire de la colonisation ; manifestations aborigènes.",
+        "1989": "Longue grève des pilotes de ligne.",
+        "1990": "Quatrième victoire de Bob Hawke.",
+        "1991": "Paul Keating renverse Bob Hawke à la tête des travaillistes.",
+        "1992": "Arrêt Mabo : la Haute Cour reconnaît les droits fonciers aborigènes."
+      }
+    },
+    "47": {
+      "nom": "Chine", "adjectif": "chinois", "capitale": "Pékin",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "le mouvement contre-révolutionnaire",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le dirigeant", "nom": "Deng Xiaoping" }
+      ],
+      "evenements": {
+        "1982": "Nouvelle Constitution ; le recensement dépasse le milliard d’habitants.",
+        "1983": "Campagne contre la « pollution spirituelle ».",
+        "1984": "Accord sino-britannique sur la rétrocession de Hong Kong.",
+        "1985": "L’armée est réduite d’un million d’hommes.",
+        "1986": "Manifestations étudiantes pour la démocratie.",
+        "1987": "Hu Yaobang est limogé ; Zhao Ziyang prend la tête du Parti.",
+        "1988": "L’inflation s’envole après la libéralisation des prix.",
+        "1989": "Répression du mouvement de la place Tiananmen.",
+        "1990": "Pékin accueille les Jeux asiatiques.",
+        "1991": "Normalisation des relations avec le Viêt Nam.",
+        "1992": "Tournée de Deng Xiaoping dans le Sud ; relations avec la Corée du Sud."
+      }
+    },
+    "48": {
+      "nom": "Viêt Nam", "adjectif": "vietnamien", "capitale": "Hanoï",
+      "oppositionGauche": "les Khmers rouges", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le secrétaire général", "nom": "Lê Duẩn" },
+        { "depuis": 1987, "titre": "le secrétaire général", "nom": "Nguyễn Văn Linh" },
+        { "depuis": 1991, "titre": "le secrétaire général", "nom": "Đỗ Mười" }
+      ],
+      "evenements": {
+        "1982": "Ve congrès du Parti communiste.",
+        "1983": "Offensive contre les camps khmers rouges le long de la frontière thaïlandaise.",
+        "1984": "Violents affrontements frontaliers avec la Chine.",
+        "1985": "Une réforme monétaire ratée relance l’inflation.",
+        "1986": "Mort de Lê Duẩn ; le VIe congrès lance le « Đổi mới ».",
+        "1987": "Libération de milliers de détenus des camps de rééducation.",
+        "1988": "Accrochage naval avec la Chine aux îles Spratleys.",
+        "1989": "Les dernières troupes vietnamiennes quittent le Cambodge.",
+        "1990": "L’aide soviétique s’effondre.",
+        "1991": "Normalisation avec la Chine ; accords de Paris sur le Cambodge.",
+        "1992": "Nouvelle Constitution."
+      }
+    },
+    "49": {
+      "nom": "Turquie", "adjectif": "turc", "capitale": "Ankara",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Evren" },
+        { "depuis": 1990, "titre": "le président", "nom": "Özal" }
+      ],
+      "evenements": {
+        "1982": "Nouvelle Constitution ; le général Kenan Evren devient président.",
+        "1983": "Retour aux urnes : Turgut Özal remporte les élections.",
+        "1984": "Le PKK commence sa lutte armée.",
+        "1985": "Turgut Özal libéralise l’économie.",
+        "1986": "Attentat contre la synagogue Neve Shalom d’Istanbul.",
+        "1987": "La Turquie demande son adhésion à la CEE.",
+        "1988": "Özal échappe à un attentat ; afflux de Kurdes irakiens fuyant les gaz.",
+        "1989": "Özal devient président ; exode des Turcs de Bulgarie.",
+        "1990": "Ankara ferme l’oléoduc irakien et soutient la coalition.",
+        "1991": "Afflux de réfugiés kurdes ; Süleyman Demirel devient Premier ministre.",
+        "1992": "Un séisme détruit Erzincan."
+      }
+    },
+    "50": {
+      "nom": "Syrie", "adjectif": "syrien", "capitale": "Damas",
+      "oppositionGauche": "les Frères musulmans", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Assad" }
+      ],
+      "evenements": {
+        "1982": "Massacre de Hama : l’insurrection des Frères musulmans est écrasée.",
+        "1983": "Damas soutient la révolte contre Arafat ; siège de Tripoli au Liban.",
+        "1984": "Rifaat el-Assad tente de s’emparer du pouvoir.",
+        "1985": "Hafez el-Assad est réélu.",
+        "1986": "Affaire Hindawi : Londres rompt avec Damas.",
+        "1987": "Les troupes syriennes reviennent à Beyrouth-Ouest.",
+        "1988": "Damas reste l’allié de l’Iran contre l’Irak.",
+        "1989": "Les accords de Taëf consacrent la tutelle syrienne sur le Liban.",
+        "1990": "La Syrie rejoint la coalition ; ses troupes chassent Aoun de Beyrouth.",
+        "1991": "Damas participe à la conférence de paix de Madrid.",
+        "1992": "Les juifs syriens sont autorisés à voyager."
+      }
+    },
+    "51": {
+      "nom": "Israël", "adjectif": "israélien", "capitale": "Jérusalem",
+      "oppositionGauche": "l’OLP", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Begin" },
+        { "depuis": 1984, "titre": "le Premier ministre", "nom": "Shamir" },
+        { "depuis": 1985, "titre": "le Premier ministre", "nom": "Peres" },
+        { "depuis": 1987, "titre": "le Premier ministre", "nom": "Shamir" }
+      ],
+      "evenements": {
+        "1982": "Invasion du Liban ; massacres de Sabra et Chatila.",
+        "1983": "Menahem Begin démissionne ; Yitzhak Shamir lui succède.",
+        "1984": "Gouvernement d’union nationale ; opération Moïse en faveur des juifs éthiopiens.",
+        "1985": "Retrait partiel du Liban ; plan de stabilisation contre l’inflation.",
+        "1986": "Mordechaï Vanunu révèle le programme nucléaire.",
+        "1987": "Début de la première intifada.",
+        "1988": "Assassinat d’Abou Jihad à Tunis.",
+        "1989": "Plan Shamir d’élections dans les territoires occupés.",
+        "1990": "Immigration massive de juifs soviétiques.",
+        "1991": "Missiles irakiens sur Tel-Aviv ; opération Salomon.",
+        "1992": "Yitzhak Rabin devient Premier ministre."
+      }
+    },
+    "52": {
+      "nom": "Taïwan", "adjectif": "taïwanais", "capitale": "Taipei",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Chiang Ching-kuo" },
+        { "depuis": 1988, "titre": "le président", "nom": "Lee Teng-hui" }
+      ],
+      "evenements": {
+        "1982": "Communiqué sino-américain sur la réduction des ventes d’armes à Taïwan.",
+        "1983": "L’opposition hors parti dispute les élections législatives partielles.",
+        "1984": "Assassinat de l’écrivain Henry Liu en Californie ; Lee Teng-hui vice-président.",
+        "1985": "Scandale financier de la Tenth Credit Cooperative.",
+        "1986": "Fondation du Parti démocrate progressiste.",
+        "1987": "Levée de la loi martiale après 38 ans.",
+        "1988": "Mort de Chiang Ching-kuo ; Lee Teng-hui lui succède.",
+        "1989": "Premières élections avec une opposition légale.",
+        "1990": "Mouvement étudiant du Lys sauvage.",
+        "1991": "Fin des dispositions temporaires de la guerre civile.",
+        "1992": "Premières élections législatives entièrement libres."
+      }
+    },
+    "53": {
+      "nom": "Irak", "adjectif": "irakien", "capitale": "Bagdad",
+      "oppositionGauche": "les peshmergas kurdes", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Saddam Hussein" }
+      ],
+      "evenements": {
+        "1982": "Contre-offensive iranienne : l’armée irakienne évacue l’Iran.",
+        "1983": "L’Irak emploie des armes chimiques contre l’Iran.",
+        "1984": "Guerre des pétroliers ; reprise des relations avec les États-Unis.",
+        "1985": "Guerre des villes : missiles contre Téhéran.",
+        "1986": "L’Iran s’empare de la péninsule de Fao.",
+        "1987": "Un Mirage irakien frappe par erreur la frégate américaine Stark.",
+        "1988": "Gazage de Halabja ; campagne Anfal ; cessez-le-feu avec l’Iran.",
+        "1989": "Création du Conseil de coopération arabe avec l’Égypte, la Jordanie et le Yémen.",
+        "1990": "Invasion du Koweït.",
+        "1991": "Défaite dans la guerre du Golfe ; soulèvements chiite et kurde écrasés.",
+        "1992": "Zone d’exclusion aérienne au sud du pays."
+      }
+    },
+    "54": {
+      "nom": "Arabie saoudite", "adjectif": "saoudien", "capitale": "Riyad",
+      "oppositionGauche": "les extrémistes chiites", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le roi", "nom": "Fahd" }
+      ],
+      "evenements": {
+        "1982": "Mort du roi Khaled ; Fahd lui succède et propose un plan de paix.",
+        "1983": "L’OPEP baisse ses prix pour la première fois.",
+        "1984": "La chasse saoudienne abat des avions iraniens au-dessus du Golfe.",
+        "1985": "Riyad ouvre les vannes et fait chuter le prix du pétrole.",
+        "1986": "Effondrement des cours ; Fahd prend le titre de « Serviteur des deux saintes mosquées ».",
+        "1987": "Émeutes de pèlerins iraniens à La Mecque.",
+        "1988": "Révélation de l’achat de missiles chinois.",
+        "1989": "Les accords de Taëf sur le Liban sont signés en Arabie saoudite.",
+        "1990": "Le royaume accueille les troupes de l’opération Bouclier du désert.",
+        "1991": "Guerre du Golfe : missiles irakiens sur Riyad.",
+        "1992": "Loi fondamentale et création d’un Conseil consultatif."
+      }
+    },
+    "55": {
+      "nom": "Iran", "adjectif": "iranien", "capitale": "Téhéran",
+      "oppositionGauche": "le Toudeh", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "l’ayatollah", "nom": "Khomeiny" },
+        { "depuis": 1989, "titre": "le guide suprême", "nom": "Khamenei" }
+      ],
+      "evenements": {
+        "1982": "L’armée iranienne reprend Khorramshahr.",
+        "1983": "Le parti communiste Toudeh est interdit.",
+        "1984": "Guerre des pétroliers dans le Golfe.",
+        "1985": "Des armes américaines sont livrées en secret à Téhéran.",
+        "1986": "L’Iran s’empare de la péninsule irakienne de Fao.",
+        "1987": "Émeutes de pèlerins iraniens à La Mecque.",
+        "1988": "Le croiseur américain Vincennes abat un Airbus d’Iran Air ; cessez-le-feu avec l’Irak.",
+        "1989": "Fatwa contre Salman Rushdie ; mort de l’ayatollah Khomeiny.",
+        "1990": "Un séisme fait des dizaines de milliers de morts dans le nord.",
+        "1991": "Assassinat de l’ancien Premier ministre Chapour Bakhtiar près de Paris.",
+        "1992": "Assassinat d’opposants kurdes au restaurant Mykonos de Berlin."
+      }
+    },
+    "56": {
+      "nom": "Afghanistan", "adjectif": "afghan", "capitale": "Kaboul",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "les moudjahidin",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Karmal" },
+        { "depuis": 1986, "titre": "le secrétaire général", "nom": "Najibullah" },
+        { "depuis": 1987, "titre": "le président", "nom": "Najibullah" },
+        { "depuis": 1992, "titre": "le président", "nom": "Rabbani" }
+      ],
+      "evenements": {
+        "1982": "Grande offensive soviétique dans la vallée du Panchir.",
+        "1983": "Trêve entre l’Armée rouge et le commandant Massoud.",
+        "1984": "Nouvelle offensive soviétique dans le Panchir.",
+        "1985": "Les partis de la résistance s’allient à Peshawar.",
+        "1986": "Les moudjahidin reçoivent des missiles Stinger ; Najibullah remplace Karmal.",
+        "1987": "Najibullah propose une « réconciliation nationale ».",
+        "1988": "Accords de Genève sur le retrait soviétique.",
+        "1989": "Les derniers soldats soviétiques partent ; les moudjahidin échouent devant Jalalabad.",
+        "1990": "Coup d’État manqué du ministre de la Défense Tanaï.",
+        "1991": "Les moudjahidin prennent la ville de Khost.",
+        "1992": "Chute de Najibullah ; les moudjahidin entrent dans Kaboul et se déchirent."
+      }
+    },
+    "57": {
+      "nom": "Pakistan", "adjectif": "pakistanais", "capitale": "Islamabad",
+      "oppositionGauche": "les Pachtounes", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Zia" },
+        { "depuis": 1989, "titre": "la Première ministre", "nom": "Benazir Bhutto" },
+        { "depuis": 1991, "titre": "le Premier ministre", "nom": "Nawaz Sharif" }
+      ],
+      "evenements": {
+        "1982": "Le Pakistan sert de base arrière aux moudjahidin afghans.",
+        "1983": "Le Mouvement pour la restauration de la démocratie défie Zia.",
+        "1984": "Référendum sur l’islamisation, qui prolonge le mandat de Zia.",
+        "1985": "Élections législatives sans partis ; levée de la loi martiale.",
+        "1986": "Retour triomphal de Benazir Bhutto.",
+        "1987": "Attentats à la bombe à Karachi.",
+        "1988": "Mort de Zia dans l’explosion de son avion ; Benazir Bhutto l’emporte.",
+        "1989": "Le Pakistan réintègre le Commonwealth.",
+        "1990": "Benazir Bhutto est destituée ; Nawaz Sharif lui succède.",
+        "1991": "Loi sur la suprématie de la charia.",
+        "1992": "Le Pakistan remporte la Coupe du monde de cricket."
+      }
+    },
+    "58": {
+      "nom": "Inde", "adjectif": "indien", "capitale": "New Delhi",
+      "oppositionGauche": "le mouvement sikh", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "la Première ministre", "nom": "Indira Gandhi" },
+        { "depuis": 1985, "titre": "le Premier ministre", "nom": "Rajiv Gandhi" },
+        { "depuis": 1990, "titre": "le Premier ministre", "nom": "V. P. Singh" },
+        { "depuis": 1991, "titre": "le Premier ministre", "nom": "Narasimha Rao" }
+      ],
+      "evenements": {
+        "1982": "New Delhi accueille les Jeux asiatiques.",
+        "1983": "Massacre de Nellie, en Assam.",
+        "1984": "Assaut du Temple d’or ; assassinat d’Indira Gandhi ; catastrophe de Bhopal.",
+        "1985": "Accord de paix sur l’Assam ; attentat contre le vol 182 d’Air India.",
+        "1986": "L’affaire Shah Bano divise le pays.",
+        "1987": "Scandale Bofors ; l’armée indienne intervient au Sri Lanka.",
+        "1988": "L’Inde déjoue un coup d’État aux Maldives.",
+        "1989": "Rajiv Gandhi perd les élections ; V. P. Singh lui succède.",
+        "1990": "Quotas du rapport Mandal ; l’insurrection embrase le Cachemire.",
+        "1991": "Assassinat de Rajiv Gandhi ; libéralisation de l’économie.",
+        "1992": "Destruction de la mosquée d’Ayodhya et émeutes."
+      }
+    },
+    "59": {
+      "nom": "Birmanie", "adjectif": "birman", "capitale": "Rangoun",
+      "oppositionGauche": "les Kachins", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "San Yu" },
+        { "depuis": 1989, "titre": "le général", "nom": "Saw Maung" },
+        { "depuis": 1992, "titre": "le général", "nom": "Than Shwe" }
+      ],
+      "evenements": {
+        "1982": "Une loi sur la citoyenneté exclut les Rohingyas.",
+        "1983": "Attentat nord-coréen contre la délégation sud-coréenne à Rangoun.",
+        "1984": "Offensive de l’armée contre les rebelles karens.",
+        "1985": "Démonétisation de plusieurs billets de banque.",
+        "1986": "L’armée combat les guérillas ethniques et le Parti communiste birman.",
+        "1987": "Nouvelle démonétisation : l’épargne des Birmans est anéantie.",
+        "1988": "Soulèvement du 8 août écrasé ; l’armée prend le pouvoir.",
+        "1989": "Aung San Suu Kyi est assignée à résidence ; le pays devient le Myanmar.",
+        "1990": "La Ligue nationale pour la démocratie gagne les élections, ignorées par la junte.",
+        "1991": "Aung San Suu Kyi reçoit le prix Nobel de la paix.",
+        "1992": "Exode des Rohingyas vers le Bangladesh ; Than Shwe prend la tête de la junte."
+      }
+    },
+    "60": {
+      "nom": "Thaïlande", "adjectif": "thaïlandais", "capitale": "Bangkok",
+      "oppositionGauche": "les insurgés", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Prem Tinsulanonda" },
+        { "depuis": 1989, "titre": "le Premier ministre", "nom": "Chatichai Choonhavan" },
+        { "depuis": 1991, "titre": "le Premier ministre", "nom": "Anand Panyarachun" }
+      ],
+      "evenements": {
+        "1982": "Bangkok célèbre son bicentenaire.",
+        "1983": "Prem Tinsulanonda est reconduit après les élections.",
+        "1984": "Dévaluation du baht.",
+        "1985": "Tentative de coup d’État écrasée à Bangkok.",
+        "1986": "Élections anticipées ; Prem reste au pouvoir.",
+        "1987": "Combats frontaliers avec le Laos.",
+        "1988": "Chatichai Choonhavan, premier Premier ministre élu depuis 1976.",
+        "1989": "Le typhon Gay dévaste le golfe de Thaïlande.",
+        "1990": "La croissance dépasse 10 % par an.",
+        "1991": "Coup d’État militaire contre Chatichai.",
+        "1992": "« Mai noir » : l’armée tire sur les manifestants."
+      }
+    },
+    "61": {
+      "nom": "Indonésie", "adjectif": "indonésien", "capitale": "Jakarta",
+      "oppositionGauche": "le Parti communiste", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Suharto" }
+      ],
+      "evenements": {
+        "1982": "Le Golkar remporte largement les élections législatives.",
+        "1983": "Des escadrons de la mort exécutent des milliers de petits délinquants.",
+        "1984": "Massacre de Tanjung Priok.",
+        "1985": "Attentat contre le temple de Borobudur.",
+        "1986": "Forte dévaluation de la roupie.",
+        "1987": "Le Golkar remporte de nouveau les élections.",
+        "1988": "Suharto est réélu pour un cinquième mandat.",
+        "1989": "Massacre de Talangsari.",
+        "1990": "Rétablissement des relations avec la Chine.",
+        "1991": "Massacre de Santa Cruz à Dili, au Timor oriental.",
+        "1992": "Jakarta refuse l’aide néerlandaise après des critiques sur le Timor."
+      }
+    },
+    "62": {
+      "nom": "Philippines", "adjectif": "philippin", "capitale": "Manille",
+      "oppositionGauche": "la Nouvelle Armée populaire", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Marcos" },
+        { "depuis": 1986, "titre": "la présidente", "nom": "Aquino" },
+        { "depuis": 1992, "titre": "le président", "nom": "Ramos" }
+      ],
+      "evenements": {
+        "1982": "Visite d’État de Ferdinand Marcos aux États-Unis.",
+        "1983": "Assassinat de l’opposant Benigno Aquino à l’aéroport de Manille.",
+        "1984": "Percée de l’opposition aux législatives.",
+        "1985": "Marcos annonce une élection présidentielle anticipée.",
+        "1986": "Révolution « du pouvoir du peuple » : Marcos s’exile, Corazon Aquino présidente.",
+        "1987": "Nouvelle Constitution ; naufrage du Doña Paz.",
+        "1988": "Loi de réforme agraire.",
+        "1989": "Tentative de coup d’État contre Aquino.",
+        "1990": "Un séisme frappe le nord de Luçon.",
+        "1991": "Éruption du Pinatubo ; le Sénat refuse de prolonger les bases américaines.",
+        "1992": "Fidel Ramos est élu ; les Américains quittent Subic Bay."
+      }
+    },
+    "63": {
+      "nom": "Guatemala", "adjectif": "guatémaltèque", "capitale": "Guatemala",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Ríos Montt" },
+        { "depuis": 1984, "titre": "le général", "nom": "Mejía Víctores" },
+        { "depuis": 1986, "titre": "le président", "nom": "Cerezo" },
+        { "depuis": 1991, "titre": "le président", "nom": "Serrano" }
+      ],
+      "evenements": {
+        "1982": "Coup d’État du général Ríos Montt ; massacres dans les villages mayas.",
+        "1983": "Le général Mejía Víctores renverse Ríos Montt.",
+        "1984": "Élection d’une assemblée constituante.",
+        "1985": "Nouvelle Constitution ; Vinicio Cerezo est élu président.",
+        "1986": "Retour d’un président civil après des décennies de régimes militaires.",
+        "1987": "Signature des accords de paix d’Esquipulas II.",
+        "1988": "Tentative de coup d’État contre Cerezo.",
+        "1989": "Nouvelle tentative de coup d’État.",
+        "1990": "Massacre de Santiago Atitlán par l’armée.",
+        "1991": "Jorge Serrano est élu ; le Guatemala reconnaît le Belize.",
+        "1992": "Rigoberta Menchú reçoit le prix Nobel de la paix."
+      }
+    },
+    "64": {
+      "nom": "Salvador", "adjectif": "salvadorien", "capitale": "San Salvador",
+      "oppositionGauche": "le FPL", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Magaña" },
+        { "depuis": 1984, "titre": "le président", "nom": "Duarte" },
+        { "depuis": 1989, "titre": "le président", "nom": "Cristiani" }
+      ],
+      "evenements": {
+        "1982": "Élections constituantes en pleine guerre civile ; Álvaro Magaña président provisoire.",
+        "1983": "Nouvelle Constitution ; visite du pape Jean-Paul II.",
+        "1984": "José Napoleón Duarte est élu président.",
+        "1985": "La guérilla enlève la fille du président Duarte.",
+        "1986": "Un séisme dévaste San Salvador.",
+        "1987": "Signature des accords d’Esquipulas II.",
+        "1988": "Le parti ARENA remporte les législatives.",
+        "1989": "Offensive du FMLN sur la capitale ; six jésuites assassinés par l’armée.",
+        "1990": "Négociations de paix sous l’égide de l’ONU.",
+        "1991": "Accords de New York ; une mission de l’ONU surveille les droits de l’homme.",
+        "1992": "Accords de paix de Chapultepec : fin de la guerre civile."
+      }
+    },
+    "65": {
+      "nom": "Costa Rica", "adjectif": "costaricien", "capitale": "San José",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Monge" },
+        { "depuis": 1986, "titre": "le président", "nom": "Arias" },
+        { "depuis": 1990, "titre": "le président", "nom": "Calderón" }
+      ],
+      "evenements": {
+        "1982": "Luis Alberto Monge entre en fonctions en pleine crise de la dette.",
+        "1983": "Le Costa Rica proclame sa neutralité perpétuelle.",
+        "1984": "Attentat de La Penca contre le chef contra Edén Pastora.",
+        "1985": "Accrochages à la frontière avec le Nicaragua.",
+        "1986": "Óscar Arias est élu président.",
+        "1987": "Óscar Arias reçoit le prix Nobel de la paix pour son plan de paix.",
+        "1988": "L’ouragan Joan touche le pays.",
+        "1989": "San José accueille les présidents des Amériques pour le centenaire de sa démocratie.",
+        "1990": "Rafael Ángel Calderón est élu ; la sélection brille à la Coupe du monde.",
+        "1991": "Un séisme frappe la région de Limón.",
+        "1992": "Essor du tourisme et poursuite de l’ajustement économique."
+      }
+    },
+    "66": {
+      "nom": "Mauritanie", "adjectif": "mauritanien", "capitale": "Nouakchott",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le colonel", "nom": "Haidalla" },
+        { "depuis": 1985, "titre": "le colonel", "nom": "Taya" }
+      ],
+      "evenements": {
+        "1982": "Tentative de coup d’État contre le colonel Haidalla.",
+        "1983": "La sécheresse pousse les nomades vers les villes.",
+        "1984": "Le colonel Taya renverse Haidalla.",
+        "1985": "Programme de redressement économique.",
+        "1986": "Le « Manifeste du Négro-Mauritanien opprimé » dénonce les discriminations.",
+        "1987": "Un complot d’officiers négro-mauritaniens est déjoué.",
+        "1988": "Rapprochement avec l’Irak de Saddam Hussein.",
+        "1989": "Violences et expulsions croisées avec le Sénégal.",
+        "1990": "Exécutions de militaires négro-mauritaniens à Inal.",
+        "1991": "Constitution multipartite approuvée par référendum.",
+        "1992": "Maaouiya Ould Taya est élu président."
+      }
+    },
+    "67": {
+      "nom": "Guinée", "adjectif": "guinéen", "capitale": "Conakry",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Sékou Touré" },
+        { "depuis": 1984, "titre": "le colonel", "nom": "Conté" }
+      ],
+      "evenements": {
+        "1982": "Ahmed Sékou Touré en visite officielle en France.",
+        "1983": "Séisme meurtrier dans la région de Koumbia.",
+        "1984": "Mort de Sékou Touré ; le colonel Lansana Conté prend le pouvoir.",
+        "1985": "Tentative de coup d’État du colonel Diarra Traoré.",
+        "1986": "Le franc guinéen remplace le syli.",
+        "1987": "Révélation de l’exécution des auteurs du putsch de 1985.",
+        "1988": "Conté annonce une transition vers un régime civil.",
+        "1989": "La guerre du Liberia voisin pousse des réfugiés en Guinée.",
+        "1990": "Nouvelle Constitution approuvée par référendum.",
+        "1991": "Afflux de réfugiés de Sierra Leone.",
+        "1992": "Les partis politiques sont légalisés."
+      }
+    },
+    "68": {
+      "nom": "Côte d’Ivoire", "adjectif": "ivoirien", "capitale": "Abidjan",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Houphouët-Boigny" }
+      ],
+      "evenements": {
+        "1982": "Grève et fermeture de l’université d’Abidjan.",
+        "1983": "Yamoussoukro devient la capitale politique.",
+        "1984": "La sécheresse provoque des coupures d’électricité.",
+        "1985": "Félix Houphouët-Boigny est réélu.",
+        "1986": "Le pays impose son nom officiel : « Côte d’Ivoire ».",
+        "1987": "Le pays suspend le remboursement de sa dette.",
+        "1988": "Bras de fer avec les négociants sur le cacao.",
+        "1989": "Achèvement de la basilique de Yamoussoukro.",
+        "1990": "Retour du multipartisme ; Alassane Ouattara Premier ministre.",
+        "1991": "Répression du mouvement étudiant.",
+        "1992": "Arrestation de l’opposant Laurent Gbagbo."
+      }
+    },
+    "69": {
+      "nom": "Burkina Faso", "adjectif": "burkinabè", "capitale": "Ouagadougou",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le colonel", "nom": "Saye Zerbo" },
+        { "depuis": 1983, "titre": "le commandant", "nom": "Ouédraogo" },
+        { "depuis": 1984, "titre": "le capitaine", "nom": "Sankara" },
+        { "depuis": 1988, "titre": "le capitaine", "nom": "Compaoré" }
+      ],
+      "evenements": {
+        "1982": "Coup d’État : le commandant Jean-Baptiste Ouédraogo renverse Saye Zerbo.",
+        "1983": "Le capitaine Thomas Sankara prend le pouvoir.",
+        "1984": "La Haute-Volta devient le Burkina Faso.",
+        "1985": "Guerre de la bande d’Agacher avec le Mali.",
+        "1986": "La Cour internationale de justice tranche le différend avec le Mali.",
+        "1987": "Assassinat de Thomas Sankara ; Blaise Compaoré prend le pouvoir.",
+        "1988": "Compaoré lance la « rectification » de la révolution.",
+        "1989": "Exécution des commandants Lingani et Zongo.",
+        "1990": "Le régime abandonne le marxisme-léninisme.",
+        "1991": "Nouvelle Constitution ; Compaoré est élu, seul candidat.",
+        "1992": "Premières élections législatives multipartites."
+      }
+    },
+    "70": {
+      "nom": "Ghana", "adjectif": "ghanéen", "capitale": "Accra",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Rawlings" }
+      ],
+      "evenements": {
+        "1982": "Trois juges de la Haute Cour sont enlevés et assassinés.",
+        "1983": "Retour d’un million de Ghanéens expulsés du Nigeria ; plan de redressement.",
+        "1984": "Le lac Volta à son plus bas : l’électricité est rationnée.",
+        "1985": "Échange d’espions avec les États-Unis.",
+        "1986": "La Banque mondiale salue le programme d’ajustement ghanéen.",
+        "1987": "Le Ghana obtient de nouveaux crédits du FMI.",
+        "1988": "Élections des assemblées de district.",
+        "1989": "Un complot contre Rawlings est déjoué.",
+        "1990": "Des soldats ghanéens partent au Liberia avec l’ECOMOG.",
+        "1991": "Rawlings annonce le retour à un régime constitutionnel.",
+        "1992": "Nouvelle Constitution ; Jerry Rawlings est élu président."
+      }
+    },
+    "71": {
+      "nom": "Niger", "adjectif": "nigérien", "capitale": "Niamey",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Kountché" },
+        { "depuis": 1988, "titre": "le général", "nom": "Saibou" }
+      ],
+      "evenements": {
+        "1982": "La sécheresse frappe de nouveau le Sahel.",
+        "1983": "Tentative de coup d’État contre Seyni Kountché.",
+        "1984": "Famine après une récolte catastrophique.",
+        "1985": "Attaque d’un poste militaire à Tchin-Tabaraden.",
+        "1986": "Débat sur une charte nationale.",
+        "1987": "Mort de Seyni Kountché ; Ali Saibou lui succède.",
+        "1988": "Ali Saibou libère des prisonniers politiques et prône la « décrispation ».",
+        "1989": "Une nouvelle Constitution institue le parti unique, le MNSD.",
+        "1990": "Répression de Touaregs à Tchin-Tabaraden ; manifestations étudiantes.",
+        "1991": "Conférence nationale souveraine.",
+        "1992": "Constitution multipartite approuvée par référendum."
+      }
+    },
+    "72": {
+      "nom": "Tchad", "adjectif": "tchadien", "capitale": "N’Djamena",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Habré" },
+        { "depuis": 1991, "titre": "le président", "nom": "Déby" }
+      ],
+      "evenements": {
+        "1982": "Hissène Habré s’empare de N’Djamena.",
+        "1983": "Offensive libyenne dans le nord ; la France déclenche l’opération Manta.",
+        "1984": "Massacres dans le sud ; accord franco-libyen de retrait mutuel.",
+        "1985": "Ralliements d’anciens rebelles au régime d’Habré.",
+        "1986": "La France lance l’opération Épervier.",
+        "1987": "« Guerre des Toyota » : les Libyens sont chassés de Ouadi Doum.",
+        "1988": "Rétablissement des relations avec la Libye.",
+        "1989": "Complot manqué d’Idriss Déby et d’Hassan Djamous.",
+        "1990": "Idriss Déby chasse Hissène Habré.",
+        "1991": "Tentatives de coup d’État contre Déby.",
+        "1992": "Les partis politiques sont autorisés."
+      }
+    },
+    "73": {
+      "nom": "Cameroun", "adjectif": "camerounais", "capitale": "Yaoundé",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Ahidjo" },
+        { "depuis": 1983, "titre": "le président", "nom": "Biya" }
+      ],
+      "evenements": {
+        "1982": "Ahmadou Ahidjo démissionne ; Paul Biya lui succède.",
+        "1983": "Rupture entre Biya et Ahidjo, accusé de complot.",
+        "1984": "Coup d’État manqué de la garde républicaine.",
+        "1985": "Le parti unique devient le RDPC.",
+        "1986": "Une éruption de gaz du lac Nyos tue plus de 1 700 personnes.",
+        "1987": "Crise économique après la chute des matières premières.",
+        "1988": "Paul Biya est réélu.",
+        "1989": "Plan d’ajustement structurel.",
+        "1990": "Retour du multipartisme ; fondation du Social Democratic Front.",
+        "1991": "Opérations « villes mortes » de l’opposition.",
+        "1992": "Réélection contestée de Paul Biya face à John Fru Ndi."
+      }
+    },
+    "74": {
+      "nom": "Centrafrique", "adjectif": "centrafricain", "capitale": "Bangui",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Kolingba" }
+      ],
+      "evenements": {
+        "1982": "Tentative de coup d’État d’Ange-Félix Patassé.",
+        "1983": "Le régime militaire s’appuie sur la présence de l’armée française.",
+        "1984": "Le pays dépend de l’aide française pour boucler son budget.",
+        "1985": "Visite du pape Jean-Paul II ; gouvernement mixte civil et militaire.",
+        "1986": "Nouvelle Constitution ; Kolingba est confirmé président.",
+        "1987": "L’ancien empereur Bokassa est jugé à Bangui.",
+        "1988": "La condamnation à mort de Bokassa est commuée.",
+        "1989": "Arrestation d’opposants réfugiés au Bénin.",
+        "1990": "Manifestations pour le multipartisme.",
+        "1991": "Kolingba accepte le multipartisme.",
+        "1992": "Les élections sont annulées."
+      }
+    },
+    "75": {
+      "nom": "Congo", "adjectif": "congolais", "capitale": "Brazzaville",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le colonel", "nom": "Sassou-Nguesso" }
+      ],
+      "evenements": {
+        "1982": "Plan quinquennal financé par la rente pétrolière.",
+        "1983": "Le pétrole fournit l’essentiel des recettes de l’État.",
+        "1984": "Denis Sassou-Nguesso est réélu par le congrès du parti unique.",
+        "1985": "La rente pétrolière commence à fléchir.",
+        "1986": "La chute du pétrole impose un plan d’ajustement.",
+        "1987": "Rébellion de l’officier Pierre Anga dans le nord.",
+        "1988": "Brazzaville accueille les négociations de paix sur l’Angola et la Namibie.",
+        "1989": "Sassou-Nguesso est reconduit.",
+        "1990": "Le parti unique renonce au marxisme-léninisme.",
+        "1991": "Conférence nationale souveraine.",
+        "1992": "Pascal Lissouba est élu président."
+      }
+    },
+    "76": {
+      "nom": "Zimbabwe", "adjectif": "zimbabwéen", "capitale": "Harare",
+      "oppositionGauche": "la ZAPU", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le Premier ministre", "nom": "Mugabe" },
+        { "depuis": 1988, "titre": "le président", "nom": "Mugabe" }
+      ],
+      "evenements": {
+        "1982": "Joshua Nkomo est chassé du gouvernement ; sabotage de la base aérienne de Thornhill.",
+        "1983": "La 5e brigade massacre des civils au Matabeleland.",
+        "1984": "Couvre-feu et pénuries alimentaires au Matabeleland.",
+        "1985": "Robert Mugabe remporte les élections.",
+        "1986": "Harare accueille le sommet des non-alignés.",
+        "1987": "Accord d’unité avec la ZAPU ; Mugabe devient président.",
+        "1988": "Scandale « Willowgate » de revente de voitures.",
+        "1989": "Edgar Tekere fonde un parti d’opposition.",
+        "1990": "Mugabe est réélu ; levée de l’état d’urgence.",
+        "1991": "Programme d’ajustement structurel.",
+        "1992": "Grave sécheresse ; loi sur la redistribution des terres."
+      }
+    },
+    "77": {
+      "nom": "Botswana", "adjectif": "botswanais", "capitale": "Gaborone",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Masire" }
+      ],
+      "evenements": {
+        "1982": "Ouverture de la mine de diamants de Jwaneng.",
+        "1983": "La sécheresse s’installe pour plusieurs années.",
+        "1984": "Quett Masire est réélu.",
+        "1985": "Raid sud-africain meurtrier sur Gaborone.",
+        "1986": "Nouveau raid sud-africain contre des militants de l’ANC.",
+        "1987": "Grâce aux diamants, l’une des croissances les plus rapides du monde.",
+        "1988": "Nouvelle incursion sud-africaine à Gaborone.",
+        "1989": "Quett Masire est réélu.",
+        "1990": "Les diamants assurent d’importants excédents budgétaires.",
+        "1991": "Grève générale des employés du secteur public.",
+        "1992": "Scandales fonciers autour de Gaborone."
+      }
+    },
+    "78": {
+      "nom": "Jordanie", "adjectif": "jordanien", "capitale": "Amman",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le roi", "nom": "Hussein" }
+      ],
+      "evenements": {
+        "1982": "Des combattants palestiniens évacués de Beyrouth arrivent en Jordanie.",
+        "1983": "Échec des discussions entre le roi Hussein et Arafat sur le plan Reagan.",
+        "1984": "Relations rétablies avec l’Égypte ; le Parlement est rappelé.",
+        "1985": "Accord d’Amman entre Hussein et Arafat.",
+        "1986": "Le roi rompt avec l’OLP.",
+        "1987": "Amman accueille un sommet arabe.",
+        "1988": "La Jordanie renonce à la Cisjordanie.",
+        "1989": "Émeutes du sud ; premières élections législatives depuis 1967.",
+        "1990": "Neutralité dans la crise du Golfe ; afflux de réfugiés du Koweït.",
+        "1991": "Adoption d’une charte nationale.",
+        "1992": "Légalisation des partis politiques."
+      }
+    },
+    "79": {
+      "nom": "Liban", "adjectif": "libanais", "capitale": "Beyrouth",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le président", "nom": "Sarkis" },
+        { "depuis": 1983, "titre": "le président", "nom": "Gemayel" },
+        { "depuis": 1989, "titre": "le général", "nom": "Aoun" },
+        { "depuis": 1990, "titre": "le président", "nom": "Hraoui" }
+      ],
+      "evenements": {
+        "1982": "Invasion israélienne ; assassinat de Bachir Gemayel ; Sabra et Chatila.",
+        "1983": "Attentats contre les Marines et les parachutistes français.",
+        "1984": "La force multinationale quitte Beyrouth.",
+        "1985": "Vague d’enlèvements d’Occidentaux.",
+        "1986": "Effondrement de la livre libanaise.",
+        "1987": "Assassinat du Premier ministre Rachid Karamé.",
+        "1988": "Le pays se retrouve avec deux gouvernements rivaux.",
+        "1989": "« Guerre de libération » d’Aoun contre la Syrie ; accords de Taëf.",
+        "1990": "Le général Aoun est chassé par l’armée syrienne.",
+        "1991": "Désarmement des milices ; libération des derniers otages.",
+        "1992": "Premières élections depuis 1972 ; Rafic Hariri Premier ministre."
+      }
+    },
+    "80": {
+      "nom": "Bolivie", "adjectif": "bolivien", "capitale": "La Paz",
+      "oppositionGauche": "l’insurrection", "oppositionDroite": "l’insurrection",
+      "dirigeants": [
+        { "depuis": 1982, "titre": "le général", "nom": "Torrelio" },
+        { "depuis": 1983, "titre": "le président", "nom": "Siles Zuazo" },
+        { "depuis": 1986, "titre": "le président", "nom": "Paz Estenssoro" },
+        { "depuis": 1990, "titre": "le président", "nom": "Paz Zamora" }
+      ],
+      "evenements": {
+        "1982": "Retour de la démocratie : Hernán Siles Zuazo devient président.",
+        "1983": "Inondations et sécheresse ravagent le pays.",
+        "1984": "Le président Siles Zuazo est brièvement enlevé.",
+        "1985": "Hyperinflation record ; plan de choc de Paz Estenssoro.",
+        "1986": "Effondrement de l’étain et licenciement de milliers de mineurs.",
+        "1987": "Le plan de stabilisation vient à bout de l’inflation.",
+        "1988": "Une loi encadre la culture de la coca.",
+        "1989": "Jaime Paz Zamora devient président.",
+        "1990": "« Marche pour le territoire et la dignité » des peuples indigènes.",
+        "1991": "L’armée bolivienne est associée à la lutte antidrogue américaine.",
+        "1992": "Le Pérou accorde à la Bolivie un accès à la mer à Ilo."
+      }
+    }
+  }
+}

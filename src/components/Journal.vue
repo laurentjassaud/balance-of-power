@@ -1,6 +1,7 @@
 <script setup lang="ts">
-// The country's newspaper (Events › Newspaper in the original): masthead, front page, the year's news about the
-// country, closing item. Clicking another country on the map turns to that country's paper.
+// The country's newspaper (Events › Newspaper in the original): masthead, front page, what really happened that
+// year (src/data/journal.json), the year's news about the country, closing item. Clicking another country on the
+// map turns to that country's paper.
 import { computed, ref, watch } from 'vue'
 import { useGameStore } from '../stores/game'
 import { journal } from '../engine/journal'
@@ -38,16 +39,20 @@ const articles = computed(() =>
         <span class="tagname">À la une</span>
         <h3>{{ page.front }}</h3>
       </article>
+      <aside v-if="page.chronicle" class="chronicle rise" style="--i: 1">
+        <span class="label">Chronique {{ store.w.year }}</span>
+        <p>{{ page.chronicle }}</p>
+      </aside>
       <ol v-if="articles.length" class="news">
-        <li v-for="(a, i) in articles" :key="`${a.n.subject}-${a.n.verb}-${a.n.object}`" class="rise" :style="{ '--i': Math.min(i + 1, 8) }">
+        <li v-for="(a, i) in articles" :key="`${a.n.subject}-${a.n.verb}-${a.n.object}`" class="rise" :style="{ '--i': Math.min(i + 2, 8) }">
           <p v-if="a.kicker" class="label kicker">{{ a.kicker }}</p>
           <h4>{{ a.title }}</h4>
           <p class="detail">{{ a.detail }}<em v-if="a.contested"> · déjà contesté</em></p>
           <button v-if="store.game?.canChallenge(a.n)" class="danger contest" @click="store.challenge(a.n)">Contester</button>
         </li>
       </ol>
-      <p v-else class="none rise" style="--i: 1">Aucune autre nouvelle de ce pays cette année.</p>
-      <footer class="brief rise" :style="{ '--i': Math.min(articles.length + 1, 9) }">
+      <p v-else class="none rise" style="--i: 2">Aucune autre nouvelle de ce pays cette année.</p>
+      <footer class="brief rise" :style="{ '--i': Math.min(articles.length + 2, 9) }">
         <span class="label">En bref</span>
         <p>{{ page.close }}</p>
       </footer>
@@ -69,6 +74,9 @@ const articles = computed(() =>
 .detail { margin: 0; font: 11px/1.4 var(--font-data); color: var(--muted); }
 .contest { margin-top: 4px; padding: 3px 10px; font-size: 11px; }
 .none { margin: 0; color: var(--muted); }
+/* What really happened that year, under the front page: set apart from the game's news by a rule below. */
+.chronicle { display: flex; flex-direction: column; gap: 4px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+.chronicle p { margin: 0; font: 13px/1.4 var(--font-body); text-wrap: pretty; }
 .brief { display: flex; flex-direction: column; gap: 4px; padding-top: 2px; }
 .brief p { margin: 0; font-style: italic; }
 /* Articles come in one after the other, quickly. */
