@@ -97,7 +97,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .float { position: fixed; left: 0; top: 0; will-change: transform; }
 .sheet {
-  max-height: calc(100dvh - 16px); display: flex; flex-direction: column; padding: 0 18px 16px;
+  max-height: calc(45dvh - 16px); display: flex; flex-direction: column; padding: 0 18px 16px;
   background-color: var(--paper); box-shadow: 0 18px 48px rgb(20 22 24 / 0.32); outline: none;
 }
 .handle { cursor: grab; touch-action: none; user-select: none; }
@@ -105,7 +105,7 @@ onBeforeUnmount(() => {
 .bar { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 0 6px; }
 .tools { display: flex; align-items: center; gap: 6px; }
 .close { width: 24px; height: 24px; padding: 0; line-height: 1; background: var(--tag); color: var(--paper); border-color: var(--tag); }
-.body { min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 14px 6px 0 0; }
+.body { min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 10px 6px 0 0; margin-top: 4px;}
 /* Press feedback, and hover only where there is a real pointer. */
 .sheet :deep(button) { transition: transform 160ms var(--ease-out), color 160ms ease, background-color 160ms ease; }
 .sheet :deep(button:active:not(:disabled)) { transform: scale(0.97); }
