@@ -20,6 +20,7 @@ npm run build    # version statique dans dist/
   - `news.ts` : textes français (actualités, conseillers).
 - `src/stores/game.ts` : store Pinia (partie en cours, indice affiché, classes et couleurs de la carte, légende).
 - `src/mapGrid.json` : la carte du jeu en pixels (grille 260 × 162 codée en RLE, un point d’ancrage par pays ; encarts agrandis pour l’Amérique centrale et le Levant).
+- `data/mapGrid.atlas.json` : la grille d’origine de l’atlas (247 × 162), gardée pour référence. Ses deux encarts étaient coupés à la colonne 0 ; ils ont été retracés d’après les frontières Natural Earth et la grille élargie de 13 colonnes à gauche pour donner `src/mapGrid.json`. Elle n’est pas chargée par l’application.
 - `src/components/` :
   - `WorldMap.vue` : carte en pixels sur canvas, étiquettes nom + valeur, zoom, déplacement, clic pour ouvrir un pays.
   - `MapLegend.vue` : légende en 5 paliers avec le nombre de pays par palier.
