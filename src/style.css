@@ -1,0 +1,71 @@
+/* Layout: a plotter poster, after the Atlas Balance of Power 2026. One grey ground, one orange signal,
+   monospace labels, corner-bracket boxes. The player's superpower is orange, the rival is black (App.vue swaps --usa/--ussr when the player is the USSR). Single deliberate theme. */
+:root {
+  --bg: #7c8187;
+  --panel: #858a90;
+  --ink: #141618;
+  --muted: #2b2f33;
+  --paper: #eef0f1;
+  --line: #2b2f33;
+  --tag: #141516;
+  --halo: #868b91;
+  --land: #b0b4b8;
+  --sea: #7c8187;
+  --accent: #ff7a1a;
+  /* side colours: fill and tag text, set by App.vue from the player's side */
+  --usa: #ff7a1a;
+  --ussr: #141516;
+  --usa-tx: #ff7a1a;
+  --ussr-tx: #eef0f1;
+  --ramp: #ff7a1a;
+  --warn: #d9480f;
+  --good: #f2a067;
+  --bad: #45413f;
+  /* class ramps for the map: diverging (USSR side → USA side) and sequential */
+  --n2: #4c4c4e; --n1: #747679; --z: #c4c7ca; --p1: #eebe9f; --p2: #fd9e5d;
+  --s1: #c9b49f; --s4: #d9480f;
+  --font-display: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-data: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --radius: 0;
+  /* Strong ease-out for things that enter or answer the pointer. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 13px/1.45 var(--font-body); }
+button, select { font: inherit; color: inherit; }
+button {
+  cursor: pointer; border: 1px solid var(--ink); background: transparent;
+  padding: 6px 12px; border-radius: 0; font: 500 12px var(--font-data); letter-spacing: .04em;
+}
+button:hover:not(:disabled) { background: var(--panel); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button.primary { background: var(--tag); color: var(--paper); border-color: var(--tag); text-transform: uppercase; letter-spacing: .08em; }
+button.primary:hover:not(:disabled) { background: var(--tag); color: var(--accent); }
+button.danger { background: var(--tag); color: var(--accent); border-color: var(--tag); }
+select { background: var(--panel); border: 1px solid var(--ink); border-radius: 0; padding: 6px 8px; font: 500 12px var(--font-data); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Scrollbars: a thin ink thumb with rounded ends, no arrows. Blink and WebKit draw them from the ::-webkit-scrollbar rules (setting
+   scrollbar-width or scrollbar-color there would bring back the native bar and its arrows); Firefox takes the standard properties. */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 3px; }
+@supports not selector(::-webkit-scrollbar) { * { scrollbar-width: thin; scrollbar-color: var(--ink) transparent; } }
+.label { font: 500 10.5px/1.25 var(--font-data); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+.num { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+/* Superpower marks: a black tag with the side's colour (orange for the USA, light for the USSR). */
+.usa, .ussr { background: var(--tag); padding: 0 4px; }
+.usa { color: var(--usa-tx); }
+.ussr { color: var(--ussr-tx); }
+h1, h2, h3 { text-wrap: balance; margin: 0; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .04em; }
+/* Corner-bracket box */
+.br { --c: var(--ink); background:
+  linear-gradient(var(--c),var(--c)) left top/12px 1px no-repeat, linear-gradient(var(--c),var(--c)) left top/1px 12px no-repeat,
+  linear-gradient(var(--c),var(--c)) right top/12px 1px no-repeat, linear-gradient(var(--c),var(--c)) right top/1px 12px no-repeat,
+  linear-gradient(var(--c),var(--c)) left bottom/12px 1px no-repeat, linear-gradient(var(--c),var(--c)) left bottom/1px 12px no-repeat,
+  linear-gradient(var(--c),var(--c)) right bottom/12px 1px no-repeat, linear-gradient(var(--c),var(--c)) right bottom/1px 12px no-repeat,
+  var(--panel); }
+.tagname { display: inline-block; background: var(--tag); color: var(--paper); font: 500 10.5px var(--font-data); letter-spacing: .1em; text-transform: uppercase; padding: 2px 6px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
