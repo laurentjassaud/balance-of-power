@@ -455,3 +455,27 @@ describe('two players', () => {
     expect(firsts).toEqual([USA, USSR, USA, USSR])
   })
 })
+
+describe('debug journal', () => {
+  it('records the calculations without changing the game, and is not saved', () => {
+    const plain = new Game({ level: 4, human: USSR, seed: 58 })
+    const debug = new Game({ level: 4, human: USSR, seed: 58, debug: true })
+    playOut(plain)
+    playOut(debug)
+    const data = (g: Game) => { const s = g.snapshot(); delete s.world.debug; return JSON.stringify(s) }
+    expect(data(debug)).toBe(data(plain))
+    expect(plain.w.log).toBeNull()
+    const kinds = new Set(debug.w.log!.entries.map((e) => e.kind))
+    for (const k of ['tour', 'prestige', 'relations', 'ia', 'militaire', 'economie', 'popularite', 'finlandisation', 'insurrection', 'mineurs']) expect(kinds.has(k as never), k).toBe(true)
+    // Entries of a step share their variables, so that they make one table.
+    const pop = debug.w.log!.entries.filter((e) => e.kind === 'popularite')
+    expect(pop.length).toBeGreaterThan(0)
+    for (const e of pop) expect(Object.keys(e.data)).toEqual(Object.keys(pop[0].data))
+    expect(pop[0].data).toHaveProperty('gPopular')
+    const saved = debug.snapshot()
+    expect(saved.world).not.toHaveProperty('log')
+    const resumed = Game.restore(JSON.parse(JSON.stringify(saved)))
+    expect(resumed.w.debug).toBe(true)
+    expect(resumed.w.log!.entries.map((e) => e.title)).toEqual(['Partie reprise'])
+  })
+})

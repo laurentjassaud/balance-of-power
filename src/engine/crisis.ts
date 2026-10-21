@@ -1,4 +1,5 @@
 import { World, NO_CNTRY, USA, Verb, div, clamp, obligation, type NewsItem } from './core'
+import { VERB_LABEL } from './news'
 
 // Crises between superpowers (and between the human player and a minor country).
 // The crisis level starts at 9 (back channel) and goes down at each escalation;
@@ -79,6 +80,11 @@ export class Crisis {
     this.rand1 = w.random()
     this.rand2 = w.random()
     this.decider = w.human
+    w.log?.add({
+      kind: 'crise', step: 'Ouverture', country: this.victim, title: `Crise ouverte : ${this.title()}`, result: kind === 'minor' ? 'contre un pays mineur' : 'entre superpuissances',
+      data: { subject: w.names[this.who], verb: VERB_LABEL[this.verb], oldVal: this.oldVal, newVal: this.newVal, ...w.imptData(this.who, this.verb, this.victim, this.oldVal, this.newVal) },
+      lines: [...w.gImptLines(this.who, this.verb, this.victim, this.oldVal, this.newVal), `Aléas de l’estimation d’intérêt : ${this.rand1}, ${this.rand2}`],
+    })
 
     if (kind === 'minor') {
       w.chgDMess(this.victim, w.human === USA ? 1 : -1)
@@ -105,6 +111,11 @@ export class Crisis {
     return Object.assign(Object.create(Crisis.prototype) as Crisis, s, { w, item: deref(s.item) })
   }
 
+  /** The questioned action, for the debug journal. */
+  private title(): string {
+    return `${this.w.nm(this.who)} · ${VERB_LABEL[this.verb]} → ${this.w.nm(this.victim)} (${this.oldVal} → ${this.newVal})`
+  }
+
   // ------------------------------------------------------------ superpower crisis
 
   private hangTough(actor: number): void {
@@ -119,11 +130,23 @@ export class Crisis {
     else if (this.level === 3) x = 8
     else if (this.level === 4) x = 2
     x = w.dipAff[1][2] > 0 ? 0 : div(x * -w.dipAff[1][2], 64)
-    if (x > Math.abs(div(w.random(), 128))) {
+    const r = Math.abs(div(w.random(), 128))
+    const level = this.level
+    if (x > r) {
       this.level = 1
       this.accident = true
     }
     w.nastiness = Math.min(127, w.nastiness + 9 - this.level)
+    w.log?.add({
+      kind: 'crise', step: 'Escalade', country: this.victim, title: `${w.nm(actor)} durcit le ton : ${this.title()}`, result: this.accident ? 'accident → guerre nucléaire' : `niveau ${this.level}`,
+      data: { subject: w.names[actor], level, integrity: w.integrity[actor], dipAffSuper: w.dipAff[1][2], risk: x, draw: r, accident: x > r, nastiness: w.nastiness },
+      lines: [
+      `Niveau de crise ${level + 1} → ${level}`,
+      `Intégrité → ${w.integrity[actor]} (+ obligation du traité ${t} × importance pour lui ${y} / 256)`,
+      `Relations USA–URSS ${level - 9} → ${w.dipAff[1][2]}`,
+      `Risque d’accident ${x} (selon le niveau et l’hostilité USA–URSS) vs tirage ${r}${x > r ? ' → ACCIDENT' : ''}`,
+      `Tension → ${w.nastiness}`,
+    ]})
     this.steps.push({ actor, action: 'escalate', level: this.level })
   }
 
@@ -147,6 +170,14 @@ export class Crisis {
         w.chgDipAff(j, loser, -z)
         w.chgDipAff(j, winner, z)
       }
+      w.log?.add({
+        kind: 'crise', step: 'Coût du recul', country: this.victim, title: `Coût du recul de ${w.nm(loser)}`, result: `≈ ${div(x, 32)} point(s) de relations par pays`,
+        data: { subject: w.names[loser], level: cl, imptUsa: g.usa, imptUssr: g.ussr, x, perCountry: div(x, 32), pugnacity: w.pugnacity[winner], integrity: w.integrity[loser] },
+        lines: [
+        `Importance USA ${g.usa}, URSS ${g.ussr} au niveau ${cl}`,
+        `x = |USA| / ${cl} + |URSS| / ${cl} + 8 − ${cl} = ${x} → chaque pays mineur : −${div(x, 32)} (reste réparti) envers ${w.nm(loser)}, autant en plus envers ${w.nm(winner)}`,
+        `Agressivité de ${w.nm(winner)} → ${w.pugnacity[winner]} · intégrité de ${w.nm(loser)} → ${w.integrity[loser]}`,
+      ]})
     }
     if (cl % 2 === 1) this.revoke()
     let x = 9 - cl
@@ -154,6 +185,14 @@ export class Crisis {
     if (loser === USA) x = -x
     w.chgDMess(this.victim, x)
     w.calcScores()
+    w.log?.add({
+      kind: 'crise', step: 'Recul', country: this.victim, title: `${w.nm(loser)} recule : ${this.title()}`, result: `${cl % 2 === 1 ? 'action annulée' : 'action maintenue'} · USA ${w.score(1)}, URSS ${w.score(2)}`,
+      data: { subject: w.names[loser], level: cl, cancelled: cl % 2 === 1, dontMess: w.dontMess[this.victim], score1: w.score(1), score2: w.score(2) },
+      lines: [
+      `Niveau ${cl} : ${cl < 8 ? 'recul public, prestige transféré' : 'recul discret, sans coût de prestige'}`,
+      cl % 2 === 1 ? 'Niveau impair : l’action contestée est annulée' : 'Niveau pair : l’action reste en place',
+      `Sphère d’influence de ${w.nm(this.victim)} ${x >= 0 ? '+' : ''}${x} → ${w.dontMess[this.victim]}`,
+    ]})
     this.steps.push({ actor: loser, action: 'backdown', level: cl })
     this.loser = loser
     this.over = true
@@ -186,7 +225,15 @@ export class Crisis {
     const w = this.w
     let x = w.gImpt(this.who, this.verb, this.victim, this.oldVal, this.newVal).total
     if (this.who === w.human) x = -x
-    if (x < 4 * this.level - 36 + Math.abs(div(w.random(), 1024))) {
+    const r = Math.abs(div(w.random(), 1024))
+    w.log?.add({
+      kind: 'crise', step: 'Décision de l’ordinateur', country: this.victim, title: `L’ordinateur décide au niveau ${this.level}`, result: x < 4 * this.level - 36 + r ? 'il durcit' : 'il recule',
+      data: { level: this.level, impt: x, threshold: 4 * this.level - 36 + r, draw: r, hardens: x < 4 * this.level - 36 + r },
+      lines: [
+      `Importance totale${this.who === w.human ? ' (inversée : action du joueur)' : ''} = ${x}`,
+      `Durcit si ${x} < 4 × ${this.level} − 36 + tirage ${r} = ${4 * this.level - 36 + r}`,
+    ]})
+    if (x < 4 * this.level - 36 + r) {
       this.hangTough(w.cmptr)
       this.checkWar()
     } else {
@@ -284,7 +331,15 @@ export class Crisis {
     const w = this.w
     const x = div(Math.abs(w.dontMess[this.victim] - w.aveDMess) * w.influence(w.human, this.who), 8)
     const y = [16, 16, 8, 8, 4, 4, 2, 2, 1, 1][this.level]
-    if (x * y < 4 * this.level - 36 + Math.abs(div(w.random(), y * 256))) {
+    const r = Math.abs(div(w.random(), y * 256))
+    w.log?.add({
+      kind: 'crise', step: 'Décision du pays mineur', country: this.victim, title: `${w.nm(this.who)} décide au niveau ${this.level}`, result: x * y < 4 * this.level - 36 + r ? 'il durcit' : 'il recule',
+      data: { subject: w.names[this.who], level: this.level, x, factor: y, threshold: 4 * this.level - 36 + r, draw: r, hardens: x * y < 4 * this.level - 36 + r },
+      lines: [
+      `x = |sphère ${w.dontMess[this.victim]} − moyenne ${w.aveDMess}| × influence du joueur ${w.influence(w.human, this.who)} / 8 = ${x} · facteur ${y}`,
+      `Durcit si ${x} × ${y} = ${x * y} < 4 × ${this.level} − 36 + tirage ${r} = ${4 * this.level - 36 + r}`,
+    ]})
+    if (x * y < 4 * this.level - 36 + r) {
       this.minorTough(this.who)
       if (this.level <= 1) this.over = true
     } else {
@@ -309,10 +364,14 @@ export function computerCrisis(w: World, item: NewsItem): void {
     w.chgDipAff(who, w.cmptr, -x)
   }
   let backDown = false
+  const L = w.log ? [`${w.nm(w.cmptr)} conteste : ${w.nm(who)} · ${VERB_LABEL[item.verb]} → ${w.nm(victim)} (${item.oldVal} → ${item.newVal})`] : null
   while (!backDown && level > 1) {
     const x = div(Math.abs(w.dontMess[victim] - w.aveDMess) * w.influence(w.cmptr, who), 8)
     const y = [16, 16, 8, 8, 4, 4, 2, 2, 1, 1][level]
-    if (x * y < 4 * level - 36 + Math.abs(div(w.random(), y * 256))) tough()
+    const r = Math.abs(div(w.random(), y * 256))
+    const hard = x * y < 4 * level - 36 + r
+    L?.push(`Niveau ${level} · ${w.nm(who)} : ${x} × ${y} = ${x * y} ${hard ? '<' : '≥'} 4 × ${level} − 36 + tirage ${r} → ${hard ? 'durcit' : 'recule, action annulée'}`)
+    if (hard) tough()
     else {
       backDown = true
       item.crisis = true
@@ -321,11 +380,18 @@ export function computerCrisis(w: World, item: NewsItem): void {
     if (!backDown && level > 1) {
       const g = w.gImpt(who, item.verb, victim, item.oldVal, item.newVal)
       const z = w.cmptr === USA ? g.usa : g.ussr
-      if (z > 4 * level - 36 + Math.abs(div(w.random(), 1024))) tough()
+      const r2 = Math.abs(div(w.random(), 1024))
+      const tougher = z > 4 * level - 36 + r2
+      L?.push(`Niveau ${level} · ordinateur : importance ${z} ${tougher ? '>' : '≤'} 4 × ${level} − 36 + tirage ${r2} → ${tougher ? 'durcit' : 'recule'}`)
+      if (tougher) tough()
       else {
         backDown = true
         item.crisis = true
       }
     }
   }
+  w.log?.add({
+    kind: 'crise', step: 'Crise ordinateur / pays mineur', country: victim, title: `Crise ordinateur / ${w.nm(who)}`, result: backDown ? `close au niveau ${level}` : `niveau ${level}`,
+    data: { subject: w.names[who], verb: VERB_LABEL[item.verb], level, backedDown: backDown }, lines: L!,
+  })
 }

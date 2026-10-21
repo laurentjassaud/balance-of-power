@@ -113,7 +113,8 @@ export const CENTERS: Record<number, [number, number]> = (() => {
 /** localStorage key of the game in progress; bump SAVE_VERSION when the snapshot format changes. */
 const SAVE_KEY = 'balance-of-power/partie'
 const SAVE_VERSION = 1
-interface Save { v: number; game: GameSnapshot; mapMode: MapMode; selected: number; tab: 'country' | 'news' | 'scores'; bgPer?: Per; selDir?: 'out' | 'in' }
+export type Tab = 'country' | 'news' | 'scores' | 'logs'
+interface Save { v: number; game: GameSnapshot; mapMode: MapMode; selected: number; tab: Tab; bgPer?: Per; selDir?: 'out' | 'in' }
 
 export const useGameStore = defineStore('game', () => {
   const game = shallowRef<Game | null>(null)
@@ -121,12 +122,14 @@ export const useGameStore = defineStore('game', () => {
   const version = ref(0)
   const selected = ref(0)
   const mapMode = ref<MapMode>('align')
-  const tab = ref<'country' | 'news' | 'scores'>('news')
+  const tab = ref<Tab>('news')
   const focusNews = shallowRef<NewsItem | null>(null)
   /** Country whose newspaper is open, 0 when closed. */
   const journal = ref(0)
   /** Country whose history is open, 0 when closed. */
   const history = ref(0)
+  /** Debug mode: the full view of the calculation journal is open. */
+  const logsWindow = ref(false)
   /** Divisor of the background figure on display. */
   const bgPer = ref<Per>('none')
   /** Maps of the selected country's policies: what it sends out, or what it receives (the original's Going Out / Going In). */
@@ -170,13 +173,14 @@ export const useGameStore = defineStore('game', () => {
   resume()
   watch([version, selected, mapMode, tab, bgPer, selDir], persist)
 
-  function newGame(level: Level, human: number, twoPlayer: boolean) {
-    game.value = markRaw(new Game({ level, human: human as 1 | 2, twoPlayer, seed: (Date.now() ^ (Math.random() * 1e9)) >>> 0 }))
+  function newGame(level: Level, human: number, twoPlayer: boolean, debug = false) {
+    game.value = markRaw(new Game({ level, human: human as 1 | 2, twoPlayer, debug, seed: (Date.now() ^ (Math.random() * 1e9)) >>> 0 }))
     selected.value = 0
     focusNews.value = null
     tab.value = 'news'
     journal.value = 0
     history.value = 0
+    logsWindow.value = false
     touch()
   }
 
@@ -184,6 +188,7 @@ export const useGameStore = defineStore('game', () => {
     game.value = null
     journal.value = 0
     history.value = 0
+    logsWindow.value = false
     touch()
   }
 
@@ -395,7 +400,7 @@ export const useGameStore = defineStore('game', () => {
   }
 
   return {
-    game, version, w, selected, mapMode, tab, focusNews, journal, history, bgPer, bgInd, bgDiv, selDir, needsSel, cuts, verbs, countries,
+    game, version, w, selected, mapMode, tab, focusNews, journal, history, logsWindow, bgPer, bgInd, bgDiv, selDir, needsSel, cuts, verbs, countries,
     newGame, quit, nextTurn, handOver, setPolicy, challenge, respond, closeCrisis, fill, classify, value, legend, fixedSuper, policyModes, me, rival, touch,
     fmtTick, bgRank,
   }

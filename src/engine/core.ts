@@ -2,6 +2,8 @@
 // Country 1 is the USA, country 2 the USSR, 3..80 are minor countries.
 // Arrays are 1-based (index 0 unused) to stay close to the original model.
 
+import { DebugLog } from './debugLog'
+
 export const NO_CNTRY = 80
 export const USA = 1
 export const USSR = 2
@@ -126,6 +128,9 @@ export class World {
   handedOver = false
   year = FIRST_YEAR - 1
   rng: Rng
+  /** Debug mode: the calculations are recorded in log (which is not saved with the game). */
+  debug = false
+  log: DebugLog | null = null
 
   names: string[] = new Array(NO_CNTRY + 1).fill('')
   popln = arr()
@@ -213,6 +218,18 @@ export class World {
 
   random(): number {
     return this.rng.next()
+  }
+
+  /** Turns the debug journal on (fresh) or off. */
+  setDebug(on: boolean): void {
+    this.debug = on
+    // Before the first year starts (the game's setup) the entries go with the first year.
+    this.log = on ? new DebugLog(() => Math.max(this.year, FIRST_YEAR)) : null
+  }
+
+  /** Name of a country for the debug journal. */
+  nm(c: number): string {
+    return c === 0 ? 'monde' : `${this.names[c] || '?'} (${c})`
   }
 
   /** The figures the History window shows, for every country, as they stand now. */
@@ -564,5 +581,32 @@ export class World {
     }
     const total = div(clamp(raw[1] + raw[2], -MAX, MAX), 4096)
     return { total, usa: res[1], ussr: res[2] }
+  }
+
+  /** gImpt's results under the debug journal's names. */
+  imptData(sub: number, verb: Verb, obj: number, oldVal: number, newVal: number): { impt: number; imptUsa: number; imptUssr: number } {
+    const g = this.gImpt(sub, verb, obj, oldVal, newVal)
+    return { impt: g.total, imptUsa: g.usa, imptUssr: g.ussr }
+  }
+
+  /** The steps of gImpt (bias 0) written out, for the debug journal. Reads the world only. */
+  gImptLines(sub: number, verb: Verb, obj: number, oldVal: number, newVal: number): string[] {
+    const out: string[] = []
+    for (let i = 1; i <= 2; i++) {
+      let x = div(this.dipAff[i][obj], 4)
+      if (x === 0) x = 1
+      const y = div(obligation(this.treaty[i][obj]), 4) + 1
+      let z = clamp(div(this.dontMess[obj] * 1280, this.sumDMess), 1, 32)
+      if (i === 2) z = 33 - z
+      const t = clamp(div(this.adventur[i], 2), 1, 32)
+      let v = this.hurt(verb, obj, oldVal, newVal)
+      const flip = sub === 3 - i && (verb === Verb.MilAid || verb === Verb.IntvGovt || verb === Verb.Treaty) && this.dipAff[i][obj] > 0
+      if (flip) v = -v
+      const lx = div(z * x * y * t * v, 64) * this.prestVal[obj]
+      out.push(`${i === USA ? 'USA' : 'URSS'} : sphère z=${z} × affinité x=${x} × traité y=${y} × aventurisme t=${t} × dommage v=${v}${flip ? ' (inversé : aide de l’adversaire à un ami)' : ''} / 64 × prestige ${this.prestVal[obj]} = ${lx} → ${div(clamp(lx, -134144000, 134144000), 4096)}`)
+    }
+    const g = this.gImpt(sub, verb, obj, oldVal, newVal)
+    out.push(`Importance totale = ${g.total} (USA ${g.usa}, URSS ${g.ussr})`)
+    return out
   }
 }

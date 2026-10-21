@@ -4,6 +4,7 @@ import { Crisis, computerCrisis, type CrisisSnapshot, type NewsRef } from './cri
 import {
   prePlanMove, developCountries, computerAI, minorAI, annualReactions, closeYear,
 } from './simulation'
+import { VERB_LABEL, levelLabel } from './news'
 
 /** Eight years of play, as in the original. */
 export const LAST_YEAR = FIRST_YEAR + 8
@@ -49,6 +50,14 @@ export class Game {
 
   constructor(opts: NewGameOptions) {
     this.w = createWorld(opts)
+    this.w.log?.add({
+      kind: 'tour', step: 'Partie', country: 0, title: 'Nouvelle partie', result: `niveau ${opts.level}, graine ${opts.seed ?? '—'}`,
+      data: { level: opts.level, seed: opts.seed ?? '', human: this.w.names[this.w.human], twoPlayer: this.w.twoPlayer, nastiness: this.w.nastiness },
+      lines: [
+        `Joueur : ${this.w.nm(this.w.human)}${this.w.twoPlayer ? ' (deux joueurs)' : ''} · tension initiale ${this.w.nastiness}`,
+        'L’année de départ est jouée automatiquement pour fixer les scores de référence.',
+      ],
+    })
     // The first year is played automatically to set the baseline.
     this.advance()
   }
@@ -64,7 +73,7 @@ export class Game {
     const w = this.w
     const ref = (it: NewsItem): NewsRef => { const i = w.news.indexOf(it); return i >= 0 ? i : it }
     return {
-      world: Object.fromEntries(Object.entries(w).filter(([k]) => k !== 'rng')),
+      world: Object.fromEntries(Object.entries(w).filter(([k]) => k !== 'rng' && k !== 'log')),
       rng: w.rng.state,
       crisis: this.crisis?.snapshot(ref) ?? null,
       reacting: this.reacting,
@@ -76,6 +85,14 @@ export class Game {
   /** A game resumed from a snapshot, exactly where it was (its first year is not played again). */
   static restore(s: GameSnapshot): Game {
     const w = Object.assign(new World(1), s.world, { rng: Rng.fromState(s.rng) })
+    // The debug journal is not saved: a resumed game starts a fresh one.
+    if (w.debug) {
+      w.setDebug(true)
+      w.log?.add({
+        kind: 'tour', step: 'Partie', country: 0, title: 'Partie reprise', result: `année ${w.year}`, data: { level: w.level },
+        lines: ['Le journal n’est pas sauvegardé : les calculs antérieurs à la reprise ne sont plus disponibles.'],
+      })
+    }
     const deref = (r: NewsRef): NewsItem => (typeof r === 'number' ? w.news[r] : r)
     const g = Object.assign(Object.create(Game.prototype) as Game, { w })
     g.crisis = s.crisis ? Crisis.restore(w, s.crisis, deref) : null
@@ -114,18 +131,34 @@ export class Game {
     while (this.reactIdx < this.reactQueue.length) {
       const it = this.reactQueue[this.reactIdx++]
       if (it.subject === it.object) continue
+      const what = w.log ? `${w.nm(it.subject)} · ${VERB_LABEL[it.verb]} → ${w.nm(it.object)} (${it.oldVal} → ${it.newVal})` : ''
       if (
         it.subject < 3 &&
         (it.verb === Verb.IntvRebl || it.verb === Verb.InsgAid || it.verb === Verb.Destab || it.verb === Verb.Pressure)
       ) {
+        const before = w.nastiness
         w.nastiness = Math.min(127, Math.max(1, w.nastiness + it.newVal - it.oldVal))
+        w.log?.add({
+          kind: 'tension', step: 'Action hostile', country: it.object, title: `Tension après ${what}`, result: `${before} → ${w.nastiness}`,
+          data: { subject: w.names[it.subject], verb: VERB_LABEL[it.verb], oldVal: it.oldVal, newVal: it.newVal, nastiness0: before, nastiness: w.nastiness },
+          lines: [`Action hostile d’une superpuissance : tension ${before} + (${it.newVal} − ${it.oldVal}), bornée 1..127 = ${w.nastiness}`],
+        })
       }
       if (it.subject === w.human && it.newVal > it.oldVal && !w.twoPlayer && !it.crisis) {
         const g = w.gImpt(it.subject, it.verb, it.object, it.oldVal, it.newVal)
         let x = -g.total
         const z = w.cmptr === USA ? g.usa : g.ussr
         if (z < 0) x = 256
-        if (x < Math.abs(div(w.random(), 1024))) {
+        const r = Math.abs(div(w.random(), 1024))
+        w.log?.add({
+          kind: 'crise', step: 'Examen d’une action du joueur', country: it.object, title: `L’ordinateur examine : ${what}`, result: x < r ? 'il conteste → crise' : 'il laisse faire',
+          data: { verb: VERB_LABEL[it.verb], oldVal: it.oldVal, newVal: it.newVal, impt: g.total, imptUsa: g.usa, imptUssr: g.ussr, threshold: x, draw: r, challenged: x < r },
+          lines: [
+          ...w.gImptLines(it.subject, it.verb, it.object, it.oldVal, it.newVal),
+          `Seuil = −importance totale = ${-g.total}${z < 0 ? ' → 256 (l’ordinateur y perd : il ne conteste jamais)' : ''}`,
+          `Contestation si seuil ${x} < tirage |aléa / 1024| = ${r}`,
+        ]})
+        if (x < r) {
           // The computer questions the human's action.
           this.crisis = new Crisis(w, it, 'super')
           return
@@ -133,7 +166,16 @@ export class Game {
       } else if (it.subject > 2 && it.newVal > it.oldVal && !w.twoPlayer && w.influence(w.cmptr, it.subject) > 3) {
         const g = w.gImpt(it.subject, it.verb, it.object, it.oldVal, it.newVal)
         const z = w.cmptr === USA ? g.usa : g.ussr
-        if (z > Math.abs(div(w.random(), 1024))) computerCrisis(w, it)
+        const r = Math.abs(div(w.random(), 1024))
+        w.log?.add({
+          kind: 'crise', step: 'Examen d’une action d’un pays mineur', country: it.object, title: `L’ordinateur examine : ${what}`, result: z > r ? 'il conteste le pays mineur' : 'il laisse faire',
+          data: { subject: w.names[it.subject], verb: VERB_LABEL[it.verb], oldVal: it.oldVal, newVal: it.newVal, influence: w.influence(w.cmptr, it.subject), impt: g.total, imptUsa: g.usa, imptUssr: g.ussr, threshold: z, draw: r, challenged: z > r },
+          lines: [
+          `Influence de l’ordinateur sur ${w.nm(it.subject)} = ${w.influence(w.cmptr, it.subject)} (> 3)`,
+          ...w.gImptLines(it.subject, it.verb, it.object, it.oldVal, it.newVal),
+          `Contestation si importance pour l’ordinateur ${z} > tirage ${r}`,
+        ]})
+        if (z > r) computerCrisis(w, it)
       }
     }
     this.reacting = false
@@ -143,6 +185,9 @@ export class Game {
   private mainMove(): void {
     const w = this.w
     w.news = []
+    w.log?.add({ kind: 'tour', step: 'Coup principal', country: 0, title: `Coup principal de ${w.year}`, result: 'réactions, développement, ordinateur', data: {}, lines: [
+      `${w.year > FIRST_YEAR ? 'Réactions annuelles des pays · ' : ''}développement des pays${w.twoPlayer ? '' : ' · décisions de l’ordinateur'}${w.level === 4 ? ' · politique des pays mineurs' : ''} · bilan de l’année`,
+    ]})
     if (w.year > FIRST_YEAR) annualReactions(w)
     developCountries(w)
     if (!w.twoPlayer) computerAI(w)
@@ -287,7 +332,15 @@ export class Game {
     if (!verbsForLevel(w.level).includes(verb)) return false
     const lim = this.limits(country, verb)
     if (value < lim.min || value > lim.max || value === lim.current) return false
+    // Written before the move, so that its importance is the one the computer will weigh.
+    const data = w.log ? { oldVal: lim.current, newVal: value, min: lim.min, max: lim.max, available: lim.available ?? '', ...w.imptData(w.human, verb, country, lim.current, value) } : {}
+    const lines = w.log ? [
+      `${levelLabel(verb, lim.current)} → ${levelLabel(verb, value)}`,
+      `Bornes autorisées ${lim.min}..${lim.max}${lim.available !== null ? ` · ressource disponible ${lim.available}` : ''}`,
+      ...w.gImptLines(w.human, verb, country, lim.current, value),
+    ] : []
     w.doPolicy(w.human, verb, country, value, value <= lim.current)
+    w.log?.add({ kind: 'joueur', step: VERB_LABEL[verb], country, title: `${w.nm(w.human)} · ${VERB_LABEL[verb]} → ${w.nm(country)}`, result: `${lim.current} → ${value}`, data, lines })
     return true
   }
 }

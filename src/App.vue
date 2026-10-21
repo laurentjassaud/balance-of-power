@@ -16,6 +16,8 @@ import EndScreen from './components/EndScreen.vue'
 import Journal from './components/Journal.vue'
 import History from './components/History.vue'
 import ConfirmDialog from './components/ConfirmDialog.vue'
+import LogsPanel from './components/LogsPanel.vue'
+import LogsWindow from './components/LogsWindow.vue'
 import emblemUsa from './assets/emblem-usa.webp'
 import emblemUssr from './assets/emblem-ussr.webp'
 
@@ -53,8 +55,11 @@ const res = computed(() => {
   void store.version
   return store.game?.resources()
 })
-// Once the game is over there is no news to handle nor policy to set: the Dossier keeps only the prestige.
-const tab = computed(() => (w.value?.ended ? 'scores' : store.tab))
+// Once the game is over there is no news to handle nor policy to set: the Dossier keeps only the prestige (and the logs in debug mode).
+const tab = computed(() => {
+  if (store.tab === 'logs') return w.value?.debug ? 'logs' : 'news'
+  return w.value?.ended ? 'scores' : store.tab
+})
 </script>
 
 <template>
@@ -122,9 +127,11 @@ const tab = computed(() => (w.value?.ended ? 'scores' : store.tab))
           <button role="tab" :aria-selected="tab === 'country'" @click="store.tab = 'country'">Pays</button>
         </template>
         <button role="tab" :aria-selected="tab === 'scores'" @click="store.tab = 'scores'">Prestige</button>
+        <button v-if="w.debug" id="tab-logs" role="tab" :aria-selected="tab === 'logs'" @click="store.tab = 'logs'">Logs</button>
       </nav>
       <NewsPanel v-if="tab === 'news'" />
       <CountryPanel v-else-if="tab === 'country'" />
+      <LogsPanel v-else-if="tab === 'logs'" />
       <ScoreChart v-else />
       </div>
       <section v-if="res && !w.ended" class="res" aria-labelledby="res-title">
@@ -147,6 +154,7 @@ const tab = computed(() => (w.value?.ended ? 'scores' : store.tab))
       confirm="Nouvelle partie" cancel="Continuer la partie" @confirm="confirmNew = false; store.quit()" @cancel="confirmNew = false" />
     <ConfirmDialog v-if="confirmNext" :title="`Passer à ${w.year + 1} ?`" :text="`Les décisions de ${w.year} seront appliquées et ne pourront plus être modifiées.`"
       confirm="Année suivante" :cancel="`Rester en ${w.year}`" @confirm="confirmNext = false; store.nextTurn()" @cancel="confirmNext = false" />
+    <LogsWindow v-if="store.logsWindow && w.debug" />
     <CrisisDialog v-if="store.game?.crisis" />
     <EndScreen v-else-if="w.ended" />
   </div>

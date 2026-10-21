@@ -100,6 +100,8 @@ export interface NewGameOptions {
   human: typeof USA | typeof USSR
   twoPlayer?: boolean
   seed?: number
+  /** Records every calculation in the world's debug journal. */
+  debug?: boolean
 }
 
 function initCountry(w: World, id: number, name: string, p: number[]): void {
@@ -177,6 +179,7 @@ export function createWorld(opts: NewGameOptions): World {
   w.human = opts.human
   w.cmptr = 3 - opts.human
   w.twoPlayer = !!opts.twoPlayer
+  if (opts.debug) w.setDebug(true)
 
   for (let i = 1; i <= NO_CNTRY; i++) {
     for (let sp = 1; sp <= 2; sp++) w.trade[sp][i] = 4

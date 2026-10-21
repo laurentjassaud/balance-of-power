@@ -8,6 +8,7 @@ const store = useGameStore()
 const level = ref<Level>(1)
 const side = ref<number>(USA)
 const twoPlayer = ref(false)
+const debug = ref(false)
 
 const LEVEL_HELP = [
   '',
@@ -29,7 +30,7 @@ const LEVEL_HELP = [
       </p>
       <p class="credit">D’après le jeu de Chris Crawford (édition 1990), porté en Vue 3.</p>
     </div>
-    <form class="setup" @submit.prevent="store.newGame(level, side, twoPlayer)">
+    <form class="setup" @submit.prevent="store.newGame(level, side, twoPlayer, debug)">
       <fieldset>
         <legend class="label">Niveau</legend>
         <label v-for="l in [1, 2, 3, 4] as Level[]" :key="l" class="opt" :class="{ on: level === l }">
@@ -48,6 +49,7 @@ const LEVEL_HELP = [
           </label>
         </div>
         <label class="check"><input id="two-player" v-model="twoPlayer" type="checkbox" /> Deux joueurs sur le même écran</label>
+        <label class="check"><input id="debug" v-model="debug" type="checkbox" /> Débogage <small>· onglet Logs avec tous les calculs</small></label>
       </fieldset>
       <button id="start" class="primary big" type="submit">Commencer en {{ FIRST_YEAR }}</button>
     </form>
@@ -78,6 +80,7 @@ legend { margin-bottom: 6px; }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .side b { font-size: 16px; }
 .check { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
+.check small { color: var(--muted); }
 .big { padding: 12px; font-size: 13px; }
 @media (max-width: 760px) { .start { grid-template-columns: minmax(0, 1fr); padding: 28px 16px; gap: 24px; } }
 </style>
