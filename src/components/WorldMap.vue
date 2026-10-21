@@ -41,6 +41,8 @@ function resize() {
   dpr = window.devicePixelRatio || 1
   c.width = Math.round(W * dpr); c.height = Math.round(H * dpr)
   el.style.width = `${W}px`; el.style.height = `${H}px`
+  // Centred on whole pixels, so that the canvas stays sharp.
+  el.style.left = `${Math.floor((b.clientWidth - W) / 2)}px`; el.style.top = `${Math.floor((b.clientHeight - H) / 2)}px`
   clamp(); draw()
 }
 
@@ -176,27 +178,27 @@ watch(() => [store.version, store.mapMode, store.selected], () => draw())
     <div ref="wrap" class="frame">
       <canvas ref="cv" role="img" aria-label="Carte du monde. Cliquez sur un pays pour ouvrir son dossier." :class="{ link: tip }"
         @pointerdown="down" @pointermove="move" @pointerup="up" @pointerleave="tip = null; drag = null" @wheel.prevent="wheel"></canvas>
-      <div class="zoom">
-        <button aria-label="Zoomer" @click="zoomAt(1.6)">+</button>
-        <button aria-label="Dézoomer" @click="zoomAt(1 / 1.6)">−</button>
-        <button aria-label="Vue entière" @click="reset">⤢</button>
-      </div>
       <div v-if="tip" class="tip" :style="{ left: `${tip.x + 14}px`, top: `${tip.y + 10}px` }">
         <b>{{ tip.name }}</b><span v-if="tip.v">{{ tip.v }}</span>
       </div>
+    </div>
+    <div class="zoom">
+      <button aria-label="Zoomer" @click="zoomAt(1.6)">+</button>
+      <button aria-label="Dézoomer" @click="zoomAt(1 / 1.6)">−</button>
+      <button aria-label="Vue entière" @click="reset">⤢</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* The box keeps the grid's proportions unless the layout gives it a height; the map sits in its top-left corner. */
+/* The box keeps the grid's proportions unless the layout gives it a height; the map is centred in it. */
 .map { position: relative; aspect-ratio: v-bind(RATIO); }
 .frame { position: absolute; left: 0; top: 0; }
 canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 /* The tooltip shows exactly while the pointer is over a country, which a click opens. */
 canvas.link { cursor: pointer; }
-/* Bottom-right is open sea; bottom-left holds the Levant inset. */
-.zoom { position: absolute; right: 0; bottom: 0; display: flex; gap: 2px; }
+/* In the bottom-right corner of the box, whatever room the centred map leaves around it. */
+.zoom { position: absolute; right: 0; bottom: 0; z-index: 1; display: flex; gap: 2px; }
 .zoom button { width: 28px; height: 28px; padding: 0; background: var(--tag); color: var(--paper); border-color: var(--tag); font-size: 14px; }
 .zoom button:hover { color: var(--accent); background: var(--tag); }
 .tip { position: absolute; pointer-events: none; display: flex; gap: 6px; align-items: center; font: 500 11px var(--font-data);
