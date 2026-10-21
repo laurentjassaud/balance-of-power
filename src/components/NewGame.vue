@@ -28,7 +28,7 @@ const LEVEL_HELP = [
         Huit ans pour accroître le prestige de votre superpuissance sans déclencher de guerre nucléaire.
         Aidez vos alliés, armez les rebelles chez l’adversaire, contestez ses initiatives… et sachez reculer à temps.
       </p>
-      <p class="credit">D’après le jeu de Chris Crawford (édition 1990), porté en Vue 3.</p>
+      <p class="credit">D’après le jeu de Chris Crawford (édition 1990).</p>
     </div>
     <form class="setup" @submit.prevent="store.newGame(level, side, twoPlayer, debug)">
       <fieldset>
