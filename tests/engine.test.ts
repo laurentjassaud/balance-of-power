@@ -479,3 +479,39 @@ describe('debug journal', () => {
     expect(resumed.w.log!.entries.map((e) => e.title)).toEqual(['Partie reprise'])
   })
 })
+
+describe('policy report (debug)', () => {
+  it('projects the fight the next year runs, and moves with the weapons sent', async () => {
+    const { project, currentState } = await import('../src/engine/policyDebug')
+    const g = new Game({ level: 1, human: USA, seed: 77, debug: true })
+    const w = g.w
+    const before = Array.from({ length: NO_CNTRY + 1 }, (_, i) => (i > 2 ? project(w, i) : null))
+    expect(currentState(w, 5).milPowr).toBe(w.milPowr[5])
+    g.nextTurn()
+    let checked = 0
+    for (const e of w.log!.entries.filter((e) => e.kind === 'insurrection' && e.year === w.year && e.country > 2)) {
+      const p = before[e.country]!
+      // Foreign troops weigh by the superpowers' power of the new year, and refused aid changes the weapons.
+      const pow = w.log!.entries.find((m) => m.kind === 'militaire' && m.step === 'Puissance' && m.year === w.year && m.country === e.country)!
+      if (p.intvGovt1 || p.intvGovt2 || p.intvRebl1 || p.intvRebl2 || pow.data.govtAid !== p.govtAid) continue
+      expect(e.data.milPowr0).toBe(p.govtPowr)
+      expect(e.data.recruits).toBe(p.fighters)
+      expect(e.data.insgPowr0).toBe(p.insgPowr)
+      expect(e.data.strngRat).toBe(p.strngRat)
+      checked++
+    }
+    expect(checked).toBeGreaterThan(40)
+
+    // Weapons to rebels: more rebel weapons, a weaker government, a lower ratio.
+    const c = Array.from({ length: NO_CNTRY - 2 }, (_, i) => i + 3).find((i) => g.limits(i, Verb.InsgAid).max >= 2 && w.insgAid[USA][i] === 0)
+    expect(c).toBeDefined()
+    const p0 = project(w, c!)
+    expect(g.setPolicy(c!, Verb.InsgAid, 2)).toBe(true)
+    const p1 = project(w, c!)
+    expect(p1.shipments - p0.shipments).toBe(5)
+    expect(p1.insgPowr).toBeGreaterThanOrEqual(p0.insgPowr)
+    expect(p1.strngRat).toBeLessThanOrEqual(p0.strngRat)
+    // −12 per level in the reaction terms, summed then divided by 8.
+    expect(p1.reaction1).toBeLessThan(p0.reaction1)
+  })
+})

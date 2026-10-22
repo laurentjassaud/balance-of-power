@@ -18,6 +18,7 @@ import History from './components/History.vue'
 import ConfirmDialog from './components/ConfirmDialog.vue'
 import LogsPanel from './components/LogsPanel.vue'
 import LogsWindow from './components/LogsWindow.vue'
+import PolicyReport from './components/PolicyReport.vue'
 import emblemUsa from './assets/emblem-usa.webp'
 import emblemUssr from './assets/emblem-ussr.webp'
 
@@ -155,6 +156,7 @@ const tab = computed(() => {
     <ConfirmDialog v-if="confirmNext" :title="`Passer à ${w.year + 1} ?`" :text="`Les décisions de ${w.year} seront appliquées et ne pourront plus être modifiées.`"
       confirm="Année suivante" :cancel="`Rester en ${w.year}`" @confirm="confirmNext = false; store.nextTurn()" @cancel="confirmNext = false" />
     <LogsWindow v-if="store.logsWindow && w.debug" />
+    <PolicyReport v-if="store.policyReport && w.debug" />
     <CrisisDialog v-if="store.game?.crisis" />
     <EndScreen v-else-if="w.ended" />
   </div>

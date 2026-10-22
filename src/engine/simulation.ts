@@ -256,28 +256,78 @@ function coup(w: World, i: number): void {
   })
 }
 
+// ------------------------------------------------------------------ military balance
+// The steps of developCountries that set the government against its rebels, as pure functions: the yearly
+// development runs them, and the debug mode's policy report reruns them to project the next year.
+
+/** Power that superpower sp's troops bring to one side of country i (the book's Intervention Power). */
+export function intvPower(w: World, troops: number[][], i: number, sp: number): number {
+  return div(intvConv(troops[sp][i]) * w.milPowr[sp], w.milMen[sp])
+}
+
+/** Power of country i's government before fighting its rebels (the book's Government Power). */
+export function govtPower(w: World, i: number) {
+  const weapons = Math.max(1, div(w.miltSpnd[i] + w.govtAid[i], 2))
+  const soldiers = w.milMen[i]
+  const base = div(4 * weapons * soldiers, weapons + soldiers)
+  const intvUsa = intvPower(w, w.intvGovt, i, 1), intvUssr = intvPower(w, w.intvGovt, i, 2)
+  return { weapons, soldiers, base, intvUsa, intvUssr, power: base + intvUsa + intvUssr }
+}
+
+/** Power of country i's rebels before the fighting (the book's Insurgency Power). */
+export function insgPower(w: World, i: number) {
+  const fighters = div(div((256 - w.maturity[i]) * w.popln[i], 256) * w.sqrtStrg[i], 80)
+  let shipments = 0
+  for (let j = 1; j <= w.cntryCount; j++) shipments += milAidConv(w.insgAid[j][i])
+  const weapons = Math.max(2 * shipments, div(fighters, 8) + 1)
+  const base = div(4 * weapons * fighters, weapons + fighters)
+  const intvUsa = intvPower(w, w.intvRebl, i, 1), intvUssr = intvPower(w, w.intvRebl, i, 2)
+  return { fighters, shipments, weapons, base, intvUsa, intvUssr, power: i < 3 ? 1 : base + intvUsa + intvUssr }
+}
+
+/** A year of fighting: each side loses a quarter of the other's strength (the rebels, of what the army has left). */
+export function combat(govt: number, insg: number) {
+  const milPowr = Math.max(1, govt - div(insg, 4))
+  const insgPowr = Math.max(1, insg - div(milPowr, 4))
+  let ratio = div(milPowr, insgPowr)
+  if (insgPowr === 1 && milPowr < 8192) ratio *= 4
+  return { milPowr, insgPowr, ratio }
+}
+
+/** The terms of minor country i's yearly reaction to superpower j's policies; their sum / 8 moves its relations. */
+export function reactionTerms(w: World, i: number, j: number): number[] {
+  return [
+    div(25 * div(256 * econConv(w.econAid[j][i]), w.gnp[i]), w.gPopular[i] + 1),
+    -32 * w.destab[j][i],
+    div(w.miltAid[j][i] * w.miltPress[i], 8),
+    -12 * w.insgAid[j][i],
+    div(w.intvGovt[j][i] * w.miltPress[i], 4),
+    -64 * w.intvRebl[j][i],
+    -16 * w.pressure[j][i],
+    div(div(w.treaty[j][i] * w.integrity[j], 128) * w.miltPress[i], 8),
+    8 * (w.trade[j][i] - 3),
+  ]
+}
+
 // ------------------------------------------------------------------ yearly development
 
 /** Military balance, insurgency, economy, popularity, coups and Finlandization for every country. */
 export function developCountries(w: World): void {
-  const arf = (m: number[][], who: number, sp: number) => div(intvConv(m[sp][who]) * w.milPowr[sp], w.milMen[sp])
   for (let i = 1; i <= NO_CNTRY; i++) {
     w.finlFlag[i] = false
     w.coupFlag[i] = false
     w.rebWinFlag[i] = false
 
-    let temp = Math.max(1, div(w.miltSpnd[i] + w.govtAid[i], 2))
-    let x = w.milMen[i]
-    const g1 = arf(w.intvGovt, i, 1), g2 = arf(w.intvGovt, i, 2)
-    w.milPowr[i] = div(4 * temp * x, temp + x) + g1 + g2
+    const gp = govtPower(w, i)
+    w.milPowr[i] = gp.power
     w.log?.add({
       kind: 'militaire', step: 'Puissance', country: i, title: `Puissance militaire de ${w.nm(i)}`, result: `${w.milPowr[i]}`,
-      data: { miltSpnd: w.miltSpnd[i], govtAid: w.govtAid[i], temp, milMen: x, base: div(4 * temp * x, temp + x), intvUsa: g1, intvUssr: g2, milPowr: w.milPowr[i] },
+      data: { miltSpnd: w.miltSpnd[i], govtAid: w.govtAid[i], temp: gp.weapons, milMen: gp.soldiers, base: gp.base, intvUsa: gp.intvUsa, intvUssr: gp.intvUssr, milPowr: w.milPowr[i] },
       lines: [
-        `Moyens t = max(1, (dépenses militaires ${w.miltSpnd[i]} + aide reçue ${w.govtAid[i]}) / 2) = ${temp}`,
-        `Effectifs x = ${x}`,
-        `4 × t × x / (t + x) = ${div(4 * temp * x, temp + x)}`,
-        `+ troupes étrangères pour le gouvernement : USA ${g1}, URSS ${g2}`,
+        `Moyens t = max(1, (dépenses militaires ${w.miltSpnd[i]} + aide reçue ${w.govtAid[i]}) / 2) = ${gp.weapons}`,
+        `Effectifs x = ${gp.soldiers}`,
+        `4 × t × x / (t + x) = ${gp.base}`,
+        `+ troupes étrangères pour le gouvernement : USA ${gp.intvUsa}, URSS ${gp.intvUssr}`,
       ],
     })
 
@@ -312,32 +362,25 @@ export function developCountries(w: World): void {
     }
 
     // insurgency
-    x = div(div((256 - w.maturity[i]) * w.popln[i], 256) * w.sqrtStrg[i], 80)
-    temp = 0
-    for (let j = 1; j <= w.cntryCount; j++) temp += 2 * milAidConv(w.insgAid[j][i])
-    const rebelArms = temp
-    if (temp < div(x, 8) + 1) temp = div(x, 8) + 1
-    const r1 = arf(w.intvRebl, i, 1), r2 = arf(w.intvRebl, i, 2)
-    w.insgPowr[i] = div(4 * temp * x, temp + x) + r1 + r2
-    if (i < 3) w.insgPowr[i] = 1
-    // combat: each side loses a quarter of the other's strength
+    const ip = insgPower(w, i)
+    w.insgPowr[i] = ip.power
     const milBefore = w.milPowr[i], insBefore = w.insgPowr[i]
-    w.milPowr[i] = Math.max(1, w.milPowr[i] - div(w.insgPowr[i], 4))
-    w.insgPowr[i] = Math.max(1, w.insgPowr[i] - div(w.milPowr[i], 4))
+    const fight = combat(w.milPowr[i], w.insgPowr[i])
+    w.milPowr[i] = fight.milPowr
+    w.insgPowr[i] = fight.insgPowr
     w.govtStrg[i] = w.milPowr[i]
     w.insgStrg[i] = w.insgPowr[i]
-    w.strngRat[i] = div(w.govtStrg[i], w.insgStrg[i])
-    if (w.insgStrg[i] === 1 && w.govtStrg[i] < 8192) w.strngRat[i] *= 4
+    w.strngRat[i] = fight.ratio
     w.log?.add({
       kind: 'insurrection', step: 'Combat', country: i, title: `Insurrection en ${w.nm(i)}`, result: `rapport de forces ${w.strngRat[i]}${w.strngRat[i] < 1 ? ' → révolution' : ''}`,
       data: {
-        maturity: w.maturity[i], popln: w.popln[i], sqrtStrg: w.sqrtStrg[i], recruits: x, rebelArms, temp, intvUsa: r1, intvUssr: r2,
+        maturity: w.maturity[i], popln: w.popln[i], sqrtStrg: w.sqrtStrg[i], recruits: ip.fighters, rebelArms: 2 * ip.shipments, temp: ip.weapons, intvUsa: ip.intvUsa, intvUssr: ip.intvUssr,
         milPowr0: milBefore, insgPowr0: insBefore, milPowr: w.milPowr[i], insgPowr: w.insgPowr[i], strngRat: w.strngRat[i], revolution: w.strngRat[i] < 1,
       },
       lines: [
-        `Recrues x = ((256 − maturité ${w.maturity[i]}) × population ${w.popln[i]} / 256) × √rapport ${w.sqrtStrg[i]} / 80 = ${x}`,
-        `Armes t = 2 × armes reçues (${rebelArms}), au moins x / 8 + 1 → ${temp}`,
-        `Rebelles = 4 × t × x / (t + x) ${div(4 * temp * x, temp + x)} + troupes USA ${r1} + URSS ${r2}${i < 3 ? ' (superpuissance : 1)' : ''} = ${insBefore}`,
+        `Recrues x = ((256 − maturité ${w.maturity[i]}) × population ${w.popln[i]} / 256) × √rapport ${w.sqrtStrg[i]} / 80 = ${ip.fighters}`,
+        `Armes t = 2 × armes reçues (${2 * ip.shipments}), au moins x / 8 + 1 → ${ip.weapons}`,
+        `Rebelles = 4 × t × x / (t + x) ${ip.base} + troupes USA ${ip.intvUsa} + URSS ${ip.intvUssr}${i < 3 ? ' (superpuissance : 1)' : ''} = ${insBefore}`,
         `Combat : armée ${milBefore} − rebelles / 4 = ${w.milPowr[i]} ; rebelles ${insBefore} − armée / 4 = ${w.insgPowr[i]}`,
         `Rapport de forces = ${w.govtStrg[i]} / ${w.insgStrg[i]}${w.insgStrg[i] === 1 && w.govtStrg[i] < 8192 ? ' × 4' : ''} = ${w.strngRat[i]}`,
       ],
@@ -678,17 +721,7 @@ export function annualReactions(w: World): void {
   for (let i = 3; i <= NO_CNTRY; i++) {
     for (let j = 1; j <= 2; j++) {
       minorRej(w, i, j)
-      const terms = [
-        div(25 * div(256 * econConv(w.econAid[j][i]), w.gnp[i]), w.gPopular[i] + 1),
-        -32 * w.destab[j][i],
-        div(w.miltAid[j][i] * w.miltPress[i], 8),
-        -12 * w.insgAid[j][i],
-        div(w.intvGovt[j][i] * w.miltPress[i], 4),
-        -64 * w.intvRebl[j][i],
-        -16 * w.pressure[j][i],
-        div(div(w.treaty[j][i] * w.integrity[j], 128) * w.miltPress[i], 8),
-        8 * (w.trade[j][i] - 3),
-      ]
+      const terms = reactionTerms(w, i, j)
       const sum = terms.reduce((s, t) => s + t, 0)
       const x = div(sum, 8)
       const dipAff0 = w.dipAff[i][j]

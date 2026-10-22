@@ -5,6 +5,7 @@ import { NO_CNTRY, USA, USSR, Verb, type Level, type NewsItem } from '../engine/
 import { SHAPES } from '../engine/init'
 import { VERB_LABEL, levelLabel } from '../engine/news'
 import { INDICATORS, indicator, bgValue, bgFormat, bgTitle, type Per } from '../engine/background'
+import { DEBUG_VERBS, project, currentState, challengeOdds, type PolicyReport } from '../engine/policyDebug'
 
 export type MapMode =
   | 'align' | 'relations' | 'prestige' | 'turmoil' | 'support' | 'finl' | 'finlMe' | 'wars' | 'events' | 'pop' | 'gnp' | 'army' | 'wing'
@@ -130,6 +131,8 @@ export const useGameStore = defineStore('game', () => {
   const history = ref(0)
   /** Debug mode: the full view of the calculation journal is open. */
   const logsWindow = ref(false)
+  /** Debug mode: the projected effects of the policy change just made, while their report is open. */
+  const policyReport = shallowRef<PolicyReport | null>(null)
   /** Divisor of the background figure on display. */
   const bgPer = ref<Per>('none')
   /** Maps of the selected country's policies: what it sends out, or what it receives (the original's Going Out / Going In). */
@@ -181,6 +184,7 @@ export const useGameStore = defineStore('game', () => {
     journal.value = 0
     history.value = 0
     logsWindow.value = false
+    policyReport.value = null
     touch()
   }
 
@@ -189,6 +193,7 @@ export const useGameStore = defineStore('game', () => {
     journal.value = 0
     history.value = 0
     logsWindow.value = false
+    policyReport.value = null
     touch()
   }
 
@@ -205,7 +210,20 @@ export const useGameStore = defineStore('game', () => {
   }
 
   function setPolicy(country: number, verb: Verb, value: number) {
-    const ok = game.value?.setPolicy(country, verb, value) ?? false
+    const g = game.value
+    // Debug mode: a change to the weapons or troops sent opens a report of its projected effects.
+    const watched = !!g?.w.debug && DEBUG_VERBS.includes(verb)
+    const now = watched ? currentState(g!.w, country) : null
+    const before = watched ? project(g!.w, country) : null
+    const ok = g?.setPolicy(country, verb, value) ?? false
+    if (ok && g && now && before) {
+      const w = g.w
+      const it = w.news.find((n) => n.subject === w.human && n.verb === verb && n.object === country)
+      policyReport.value = {
+        country, verb, sp: w.human, oldVal: it?.oldVal ?? value, newVal: value, year: w.year,
+        now, before, after: project(w, country), odds: it ? challengeOdds(w, it) : null,
+      }
+    }
     touch()
     return ok
   }
@@ -400,7 +418,7 @@ export const useGameStore = defineStore('game', () => {
   }
 
   return {
-    game, version, w, selected, mapMode, tab, focusNews, journal, history, logsWindow, bgPer, bgInd, bgDiv, selDir, needsSel, cuts, verbs, countries,
+    game, version, w, selected, mapMode, tab, focusNews, journal, history, logsWindow, policyReport, bgPer, bgInd, bgDiv, selDir, needsSel, cuts, verbs, countries,
     newGame, quit, nextTurn, handOver, setPolicy, challenge, respond, closeCrisis, fill, classify, value, legend, fixedSuper, policyModes, me, rival, touch,
     fmtTick, bgRank,
   }
